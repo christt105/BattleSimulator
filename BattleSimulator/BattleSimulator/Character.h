@@ -7,6 +7,8 @@ public:
 	Character(const int& attack, const int& defense, const int& speed, const int& life);
 	~Character();
 
+	void Load(const char* file);
+
 	std::string ToString();
 
 public:

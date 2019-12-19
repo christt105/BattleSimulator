@@ -9,6 +9,11 @@ Character::~Character()
 {
 }
 
+void Character::Load(const char * file)
+{
+	// TODO LOAD FROM TXT FILES IN /CHARACTERS
+}
+
 std::string Character::ToString()
 {
 	return std::string(

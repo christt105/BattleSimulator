@@ -1,0 +1,5 @@
+name: Naruto
+damage: 50
+defense: 100
+speed: 50
+health: 1000
