@@ -2,8 +2,8 @@
 #include <fstream>
 #include <iostream>
 
-Character::Character(const int & attack, const int & defense, const int & speed, const int & health)
-	: attack(attack), defense(defense), speed(speed), health(health)
+Character::Character(const int & b_attack, const int & sp_attack, const int & speed, const int & health)
+	: b_attack(b_attack), sp_attack(sp_attack), speed(speed), health(health)
 {
 }
 
@@ -15,10 +15,6 @@ Character::~Character()
 
 void Character::Load(const char * file)
 {
-	for (auto i = movements.begin(); i != movements.end(); i++)
-		delete *i;
-	movements.clear();
-
 	std::ifstream f(file);
 	if (f.is_open()) {
 		std::string line;
@@ -40,21 +36,37 @@ void Character::Load(const char * file)
 			else if (line.find("speed:") != std::string::npos) {
 				speed = LoadStat(line, "speed:");
 			}
-			else if (line.find("damage:") != std::string::npos) {
-				attack = LoadStat(line, "damage:");
+			else if (line.find("basic_attack:") != std::string::npos) {
+				b_attack = LoadStat(line, "basic_attack:");
 			}
-			else if (line.find("defense:") != std::string::npos) {
-				defense = LoadStat(line, "defense:");
+			else if (line.find("b_precision:") != std::string::npos) {
+				b_precision = LoadStat(line, "b_precision:");
+			}
+			else if (line.find("special_attack:") != std::string::npos) {
+				sp_attack = LoadStat(line, "special_attack:");
+			}
+			else if (line.find("sp_precision:") != std::string::npos) {
+				sp_precision = LoadStat(line, "sp_precision:");
 			}
 			else if (line.find("health:") != std::string::npos) {
-				health = LoadStat(line, "health:");
+				health_max = health = LoadStat(line, "health:");
 			}
-			//TODO: Load Movements
+			else if (line.find("mana:") != std::string::npos) {
+				mana_max = mana = LoadStat(line, "mana:");
+			}
+			else if (line.find("mana_cost:") != std::string::npos) {
+				mana_cost = LoadStat(line, "mana_cost:");
+			}
 		}
 		f.close();
+		if (movements.empty()) {
+			movements.push_back(new Basic());
+			movements.push_back(new Special());
+			movements.push_back(new Dodge());
+			movements.push_back(new Reload());
+			movements.push_back(new Potion());
+		}
 	}
-
-	movements.push_back(new Tackle());
 }
 
 std::string Character::MovementsToString() const
@@ -62,7 +74,7 @@ std::string Character::MovementsToString() const
 	std::string ret;
 	int n = 0;
 	for (auto i = movements.begin(); i != movements.end(); i++) {
-		ret.append("(" + std::to_string(n) + ")" + (*i)->name + '\n');
+		ret.append("(" + std::to_string(n) + ") " + (*i)->name + '\n');
 		n++;
 	}
 	return ret;
@@ -72,10 +84,11 @@ std::string Character::ToString() const
 {
 	return std::string(
 		name + '\n' +
-		"attack: " + std::to_string(attack) + '\n' + 
-		"defense: " + std::to_string(defense) + '\n' + 
-		"speed: " + std::to_string(speed) + '\n' + 
-		"health: " + std::to_string(health)
+		"health: " + std::to_string(health) + '/' + std::to_string(health_max) + '\n' +
+		"b_attack: " + std::to_string(b_attack) + " precision: " + std::to_string(b_precision) + '\n' +
+		"sp_attack: " + std::to_string(sp_attack) + " precision: " + std::to_string(sp_precision) + " cost: " + std::to_string(mana_cost) + '\n' +
+		"mana: " + std::to_string(mana) + '/' + std::to_string(mana_max) + '\n' +
+		"speed: " + std::to_string(speed) + '\n'
 	);
 }
 

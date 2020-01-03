@@ -101,9 +101,13 @@ void Game::SelectCharacterMenu()
 		std::vector<std::string> paths;
 		int i = 0;
 		for (auto entry : std::experimental::filesystem::directory_iterator("Characters")) {
-			std::cout << "  (" << i << ") " << entry.path().filename().u8string() << std::endl;
-			paths.push_back(entry.path().u8string());
-			i++;
+			if (entry.path().extension().compare(".txt") == 0) {
+				std::string name = entry.path().filename().u8string();
+				name.erase(name.begin() + name.find(".txt"), name.end());
+				std::cout << "  (" << i << ") " << name << std::endl;
+				paths.push_back(entry.path().u8string());
+				i++;
+			}
 		}
 
 		int result = -1;
@@ -119,7 +123,7 @@ void Game::SelectCharacterMenu()
 	}
 	system("cls");
 
-	battle->DoBattle(characters[0], characters[1], play_mode);
+	while (battle->DoBattle(characters[0], characters[1], play_mode)) {}
 }
 
 void Game::Update()
@@ -139,9 +143,7 @@ void Game::Update()
 			}
 			write = false;
 		}
-		
 	}
-	
 }
 
 std::string Game::MainMenuToString(MenuEnum type)

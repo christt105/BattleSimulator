@@ -12,7 +12,7 @@ Battle::~Battle()
 {
 }
 
-void Battle::DoBattle(const Character & character1, const Character & character2, Game::PlayMode mode)
+bool Battle::DoBattle(const Character & character1, const Character & character2, Game::PlayMode mode)
 {
 	characters[0] = character1;
 	characters[1] = character2;
@@ -25,8 +25,20 @@ void Battle::DoBattle(const Character & character1, const Character & character2
 
 	std::cout << "Character " << ch_wins << " (" << characters[ch_wins].name << ") won" << std::endl;
 
-	getchar();
-	system("pause");
+	int res;
+	std::cout << std::endl << "(0) Restart battle" << std::endl << "(1) Return to Main Menu" << std::endl;
+	
+	while (!(std::cin >> res) || res < 0 || res > 1) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+
+	if (res == 0) {
+		return true;
+	}
+	else if (res == 1) {
+		return false;
+	}
 }
 
 bool Battle::AreCharactersAlive()
@@ -58,8 +70,9 @@ bool Battle::DoTurn(int n_turn)
 
 void Battle::DoHvHTurn()
 {
+	int mov1, mov2;
 	for (int ch = 0; ch < 2; ch++) {
-		std::cout << "Player " << ch + 1 << " " << characters[ch].name << " select attack:" << std::endl;
+		std::cout << "Player " << ch + 1 << " " << characters[ch].name << " select a movement:" << std::endl;
 		std::cout << characters[ch].MovementsToString() << std::endl;
 
 		int result = -1;
@@ -68,14 +81,51 @@ void Battle::DoHvHTurn()
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 
-		std::cout << characters[ch].name << " uses " << characters[ch].movements[result]->name << std::endl;
-		characters[ch].movements[result]->DoAttack(&characters[ch], &characters[(ch == 0) ? 1 : 0]);
+		if (ch == 0) {
+			mov1 = result;
+		}
+		else {
+			mov2 = result;
+		}
+	}
+
+	if (characters[0].speed > characters[1].speed) {
+		std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+		characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+
+		std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+		characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+	}
+	else if (characters[1].speed > characters[0].speed) {
+		std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+		characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+
+		std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+		characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+	}
+	else {
+		int first = rand() % 2;
+
+		if (first == 0) {
+			std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+			characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+
+			std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+			characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+		}
+		else {
+			std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+			characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+
+			std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+			characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+		}
 	}
 }
 
 void Battle::DoHvAITurn()
 {
-	std::cout << "Player " << characters[0].name << " select attack:" << std::endl;
+	std::cout << "Player " << characters[0].name << " select a movement:" << std::endl;
 	std::cout << characters[0].MovementsToString() << std::endl;
 
 	int result = -1;
@@ -83,26 +133,81 @@ void Battle::DoHvAITurn()
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-
-	std::cout << characters[0].name << " uses " << characters[0].movements[result]->name << std::endl;
-	characters[0].movements[result]->DoAttack(&characters[0], &characters[1]);
-
 	int ai_mov = rand() % characters[1].movements.size();
-	std::cout << characters[1].name << " uses " << characters[1].movements[ai_mov]->name << std::endl;
-	characters[1].movements[ai_mov]->DoAttack(&characters[1], &characters[0]);
+
+	if (characters[0].speed > characters[1].speed) {
+		std::cout << characters[0].name << " uses " << characters[0].movements[result]->name << std::endl;
+		characters[0].movements[result]->DoAttack(&characters[0], &characters[1]);
+
+		std::cout << characters[1].name << " uses " << characters[1].movements[ai_mov]->name << std::endl;
+		characters[1].movements[ai_mov]->DoAttack(&characters[1], &characters[0]);
+	}
+	else if (characters[1].speed > characters[0].speed) {
+		std::cout << characters[1].name << " uses " << characters[1].movements[ai_mov]->name << std::endl;
+		characters[1].movements[ai_mov]->DoAttack(&characters[1], &characters[0]);
+
+		std::cout << characters[0].name << " uses " << characters[0].movements[result]->name << std::endl;
+		characters[0].movements[result]->DoAttack(&characters[0], &characters[1]);
+	}
+	else {
+		int first = rand() % 2;
+
+		if (first == 0) {
+			std::cout << characters[0].name << " uses " << characters[0].movements[result]->name << std::endl;
+			characters[0].movements[result]->DoAttack(&characters[0], &characters[1]);
+
+			std::cout << characters[1].name << " uses " << characters[1].movements[ai_mov]->name << std::endl;
+			characters[1].movements[ai_mov]->DoAttack(&characters[1], &characters[0]);
+		}
+		else {
+			std::cout << characters[1].name << " uses " << characters[1].movements[ai_mov]->name << std::endl;
+			characters[1].movements[ai_mov]->DoAttack(&characters[1], &characters[0]);
+
+			std::cout << characters[0].name << " uses " << characters[0].movements[result]->name << std::endl;
+			characters[0].movements[result]->DoAttack(&characters[0], &characters[1]);
+		}
+	}
 
 	std::cout << std::endl;
 }
 
 void Battle::DoAIvAITurn()
 {
-	int ai_mov = rand() % characters[0].movements.size();
-	std::cout << characters[0].name << " uses " << characters[0].movements[ai_mov]->name << std::endl;
-	characters[0].movements[ai_mov]->DoAttack(&characters[0], &characters[1]);
+	int mov1 = rand() % characters[0].movements.size();
+	int mov2 = rand() % characters[1].movements.size();
 
-	ai_mov = rand() % characters[1].movements.size();
-	std::cout << characters[1].name << " uses " << characters[1].movements[ai_mov]->name << std::endl;
-	characters[1].movements[ai_mov]->DoAttack(&characters[1], &characters[0]);
+	if (characters[0].speed > characters[1].speed) {
+		std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+		characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+
+		std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+		characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+	}
+	else if (characters[1].speed > characters[0].speed) {
+		std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+		characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+
+		std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+		characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+	}
+	else {
+		int first = rand() % 2;
+
+		if (first == 0) {
+			std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+			characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+
+			std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+			characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+		}
+		else {
+			std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+			characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+
+			std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+			characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+		}
+	}
 
 	std::cout << std::endl;
 }

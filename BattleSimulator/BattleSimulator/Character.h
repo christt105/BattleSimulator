@@ -7,7 +7,7 @@ class Character
 {
 public:
 	Character() {}
-	Character(const int& attack, const int& defense, const int& speed, const int& health);
+	Character(const int& b_attack, const int& sp_attack, const int& speed, const int& health);
 	~Character();
 
 	void Load(const char* file);
@@ -17,15 +17,24 @@ public:
 
 private:
 	int LoadStat(const std::string& line, const char* stat);
-
+	
 public:
 	std::string name;
 	std::string path;
 	// stats
-	int attack	= 0;
-	int defense = 0;
-	int speed	= 0;
-	int health	= 0;
+	int b_attack		= -1;
+	int b_precision		= -1;
+	int sp_attack		= -1;
+	int sp_precision	= -1;
+	int speed			= -1;
+	int health			= -1;
+	int health_max		= -1;
+	int mana			= -1;
+	int mana_max		= -1;
+	int mana_cost		= -1;
+
+	int mana_recover	= 30;
+	int potion_recover  = 40;
 
 	std::vector<Attack*> movements;
 };

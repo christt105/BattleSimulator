@@ -8,7 +8,7 @@ public:
 	Battle();
 	~Battle();
 	
-	void DoBattle(const Character& character1, const Character& character2, Game::PlayMode _mode);
+	bool DoBattle(const Character& character1, const Character& character2, Game::PlayMode _mode);
 
 private:
 	bool AreCharactersAlive();

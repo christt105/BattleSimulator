@@ -1,5 +1,0 @@
-name: Jhon
-damage: 5
-defense: 10
-speed: 5
-health: 100
