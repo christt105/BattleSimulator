@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
-#include "Turn.h"
+
+class Battle;
 
 class Game
 {
@@ -14,6 +15,7 @@ class Game
 		MAX
 	};
 
+public:
 	enum class PlayMode {
 		NONE = -1,
 		HvsH, HvsAI, AIvsAI,
@@ -36,10 +38,10 @@ private:
 
 public:
 	Character characters[2];
-	Turn turn;
 
 private:
 	bool playing = true;
 	PlayMode play_mode = PlayMode::NONE;
-};
 
+	Battle* battle = nullptr;
+};

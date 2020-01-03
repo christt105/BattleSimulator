@@ -1,14 +1,17 @@
-#include "Game.h"
 #include <iostream>
 #include <experimental/filesystem>
+#include "Game.h"
+#include "Battle.h"
 
 Game::Game()
 {
+	battle = new Battle();
 }
 
 
 Game::~Game()
 {
+	delete battle;
 }
 
 void Game::MainMenu()
@@ -113,6 +116,9 @@ void Game::SelectCharacterMenu()
 
 		character++;
 	}
+	system("cls");
+
+	battle->DoBattle(characters[0], characters[1], play_mode);
 }
 
 void Game::Update()
