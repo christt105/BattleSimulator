@@ -41,6 +41,7 @@ void Game::MainMenu()
 		PlayMenu();
 		break;
 	case Game::MenuEnum::CREDITS:
+		system("cls");
 		std::cout << "System Made by:" << std::endl;
 		std::cout << "\t* Christian Martinez De La Rosa: https://github.com/christt105" << std::endl;
 		std::cout << "\t* Marc Galvez Llorens: https://github.com/optus23" << std::endl;

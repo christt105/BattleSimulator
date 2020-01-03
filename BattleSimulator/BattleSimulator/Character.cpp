@@ -15,7 +15,10 @@ Character::~Character()
 
 void Character::Load(const char * file)
 {
-	//TODO: reset character
+	for (auto i = movements.begin(); i != movements.end(); i++)
+		delete *i;
+	movements.clear();
+
 	std::ifstream f(file);
 	if (f.is_open()) {
 		std::string line;
@@ -60,6 +63,7 @@ std::string Character::MovementsToString() const
 	int n = 0;
 	for (auto i = movements.begin(); i != movements.end(); i++) {
 		ret.append("(" + std::to_string(n) + ")" + (*i)->name + '\n');
+		n++;
 	}
 	return ret;
 }

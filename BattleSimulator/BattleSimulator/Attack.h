@@ -9,7 +9,7 @@ class Attack
 public:
 
 	Attack(const char* name) : name(name) {}
-	~Attack() {}
+	virtual ~Attack() {}
 
 	std::string name;
 
