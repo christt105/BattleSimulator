@@ -18,6 +18,15 @@ bool Battle::DoBattle(const Character & character1, const Character & character2
 	characters[1] = character2;
 	this->mode = mode;
 
+	if (mode == Game::PlayMode::TEST_ONE_MOV) {
+		std::cout << "Select a movement you want to test:" << std::endl;
+		std::cout << characters[0].MovementsToString() << std::endl;
+
+		while (!(std::cin >> mov_test) || mov_test < 0 || mov_test > characters[0].movements.size()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	}
 	int turn = 1;
 	while (DoTurn(turn++)) { }
 
@@ -60,6 +69,9 @@ bool Battle::DoTurn(int n_turn)
 		break;
 	case Game::PlayMode::AIvsAI:
 		DoAIvAITurn();
+		break;
+	case Game::PlayMode::TEST_ONE_MOV:
+		TestMovementTurn();
 		break;
 	default:
 		break;
@@ -174,6 +186,47 @@ void Battle::DoHvAITurn()
 void Battle::DoAIvAITurn()
 {
 	int mov1 = rand() % characters[0].movements.size();
+	int mov2 = rand() % characters[1].movements.size();
+
+	if (characters[0].speed > characters[1].speed) {
+		std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+		characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+
+		std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+		characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+	}
+	else if (characters[1].speed > characters[0].speed) {
+		std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+		characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+
+		std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+		characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+	}
+	else {
+		int first = rand() % 2;
+
+		if (first == 0) {
+			std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+			characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+
+			std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+			characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+		}
+		else {
+			std::cout << characters[1].name << " uses " << characters[1].movements[mov2]->name << std::endl;
+			characters[1].movements[mov2]->DoAttack(&characters[1], &characters[0]);
+
+			std::cout << characters[0].name << " uses " << characters[0].movements[mov1]->name << std::endl;
+			characters[0].movements[mov1]->DoAttack(&characters[0], &characters[1]);
+		}
+	}
+
+	std::cout << std::endl;
+}
+
+void Battle::TestMovementTurn()
+{
+	int mov1 = mov_test;
 	int mov2 = rand() % characters[1].movements.size();
 
 	if (characters[0].speed > characters[1].speed) {

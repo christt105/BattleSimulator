@@ -34,7 +34,7 @@ public:
 	int mana_cost		= -1;
 
 	int mana_recover	= 30;
-	int potion_recover  = 40;
+	int potion_recover  = 5;
 
 	std::vector<Attack*> movements;
 };

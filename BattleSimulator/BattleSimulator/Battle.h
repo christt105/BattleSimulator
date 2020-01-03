@@ -16,8 +16,11 @@ private:
 	void DoHvHTurn();
 	void DoHvAITurn();
 	void DoAIvAITurn();
+	void TestMovementTurn();
 
 	Character characters[2];
 	Game::PlayMode mode = Game::PlayMode::NONE;
+
+	int mov_test = -1;
 };
 
