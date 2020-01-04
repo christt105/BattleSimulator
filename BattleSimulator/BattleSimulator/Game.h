@@ -9,7 +9,8 @@ class Game
 		NONE = -1,
 		
 		QUIT, 
-		PLAY, 
+		GAME,
+		SIMULATOR, 
 		CREDITS,
 
 		MAX
@@ -28,6 +29,7 @@ public:
 
 	void MainMenu();
 	void PlayMenu();
+	void AdventureMenu();
 	void SelectCharacterMenu();
 	void Update();
 

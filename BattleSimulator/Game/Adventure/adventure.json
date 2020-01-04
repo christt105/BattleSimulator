@@ -1,0 +1,31 @@
+{
+    "Adventure": [
+        {
+            "type": "text",
+            "id": 0,
+            "text": "0.txt",
+            "to": 1
+        },
+        {
+            "type": "choice",
+            "id": 1,
+            "choices": [
+                {
+                    "name": "saltar",
+                    "to": 2
+                },
+                {
+                    "name": "repetir",
+                    "to": 0
+                }
+            ]
+        },
+        {
+            "type": "battle",
+            "id": 2,
+            "enemy": "Knight.txt",
+            "song": "primal_dialga.mp3",
+            "to": 0
+        }
+    ]
+}

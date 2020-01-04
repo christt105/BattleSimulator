@@ -37,8 +37,11 @@ void Game::MainMenu()
 		//TODO SAVE INFO OF PLAYS
 		playing = false;
 		break;
-	case Game::MenuEnum::PLAY:
+	case Game::MenuEnum::SIMULATOR:
 		PlayMenu();
+		break;
+	case Game::MenuEnum::GAME:
+		AdventureMenu();
 		break;
 	case Game::MenuEnum::CREDITS:
 		system("cls");
@@ -92,6 +95,23 @@ void Game::PlayMenu()
 	}
 
 	SelectCharacterMenu();
+}
+
+void Game::AdventureMenu()
+{
+	system("cls");
+
+	std::cout << "=========== Adventure Mode ===========" << std::endl << std::endl;
+	std::cout << "(0) 1 vs 1" << std::endl;
+	std::cout << "(1) 1 vs AI" << std::endl;
+	std::cout << "(2) AI vs AI" << std::endl;
+	std::cout << "(3) Test Movement" << std::endl;
+
+	int result = -1;
+	while (!(std::cin >> result) || result < 0 || result > 3) {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
 }
 
 void Game::SelectCharacterMenu()
@@ -159,8 +179,11 @@ std::string Game::MainMenuToString(MenuEnum type)
 	case Game::MenuEnum::QUIT:
 		return std::string("Quit");
 		break;
-	case Game::MenuEnum::PLAY:
-		return std::string("Play");
+	case Game::MenuEnum::SIMULATOR:
+		return std::string("Simulator");
+		break;
+	case Game::MenuEnum::GAME:
+		return std::string("Adventure");
 		break;
 	case Game::MenuEnum::CREDITS:
 		return std::string("Credits");
