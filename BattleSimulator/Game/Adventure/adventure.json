@@ -19,7 +19,7 @@
         {
             "type": "battle",
             "id": 2,
-            "enemy": "Knight.txt",
+            "enemy": "Characters/Naruto.txt",
             "song": "primal_dialga.mp3",
             "to": 3
         },
@@ -32,7 +32,7 @@
         {
             "type": "battle",
             "id": 4,
-            "enemy": "Knight.txt",
+            "enemy": "Characters/Naruto.txt",
             "song": "primal_dialga.mp3",
             "to": 5
         },        
@@ -42,7 +42,7 @@
             "choices": [
                 {
                     "name": "afsadfasdf",
-                    "to": 0
+                    "to": 6
                 }
             ]
         },

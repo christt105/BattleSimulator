@@ -32,22 +32,34 @@ bool Battle::DoBattle(const Character & character1, const Character & character2
 
 	int ch_wins = (characters[0].health > 0) ? 0 : 1;
 
+
+	if (mode == Game::PlayMode::ADVENTURE) {
+		if (ch_wins != 0) {
+			std::cout << "DEFEAT, restarting battle" << std::endl;
+			return true;
+		}
+		else {
+			std::cout << "Brodinski won" << std::endl;
+		}
+	}
+	else {
 	std::cout << "Character " << ch_wins << " (" << characters[ch_wins].name << ") won" << std::endl;
+		int res;
+		std::cout << std::endl << "(0) Restart battle" << std::endl << "(1) Return to Main Menu" << std::endl;
 
-	int res;
-	std::cout << std::endl << "(0) Restart battle" << std::endl << "(1) Return to Main Menu" << std::endl;
-	
-	while (!(std::cin >> res) || res < 0 || res > 1) {
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	}
+		while (!(std::cin >> res) || res < 0 || res > 1) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
 
-	if (res == 0) {
-		return true;
+		if (res == 0) {
+			return true;
+		}
+		else if (res == 1) {
+			return false;
+		}
 	}
-	else if (res == 1) {
-		return false;
-	}
+	return false;
 }
 
 bool Battle::AreCharactersAlive()
@@ -65,6 +77,7 @@ bool Battle::DoTurn(int n_turn)
 		DoHvHTurn();
 		break;
 	case Game::PlayMode::HvsAI:
+	case Game::PlayMode::ADVENTURE:
 		DoHvAITurn();
 		break;
 	case Game::PlayMode::AIvsAI:

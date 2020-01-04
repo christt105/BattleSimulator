@@ -126,7 +126,13 @@ void Game::AdventureMenu()
 		}
 			break;
 		case AdventureNode::Type::BATTLE:
-			std::cout << std::endl << "Aqui hay una batalla" << std::endl;
+			std::cout << std::endl << "================== Battle Starts ==================" << std::endl << std::endl;
+			do
+			{
+			characters[0].Load("Characters/Player.txt");
+			characters[1].Load(current->battle.enemy.c_str());
+			} while (battle->DoBattle(characters[0], characters[1], Game::PlayMode::ADVENTURE));
+
 			current = nodes[current->to_id];
 			break;
 		case AdventureNode::Type::CHOICE: {
@@ -151,7 +157,7 @@ void Game::AdventureMenu()
 			break;
 		}
 	}
-
+	std::cout << std::endl << "THE END" << std::endl << std::endl;
 	system("pause");
 }
 
