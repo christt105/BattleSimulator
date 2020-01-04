@@ -1,7 +1,9 @@
 #include <iostream>
 #include <experimental/filesystem>
+#include <fstream>
 #include "Game.h"
 #include "Battle.h"
+#include "json.hpp"
 
 Game::Game()
 {
@@ -12,6 +14,12 @@ Game::Game()
 Game::~Game()
 {
 	delete battle;
+	for (auto i = nodes.begin(); i != nodes.end(); i++) {
+		if ((*i).second->type == AdventureNode::Type::CHOICE)
+			for (auto j = (*i).second->choices.begin(); j != (*i).second->choices.end(); j++)
+				delete *j;
+		delete (*i).second;
+	}
 }
 
 void Game::MainMenu()
@@ -101,16 +109,91 @@ void Game::AdventureMenu()
 {
 	system("cls");
 
-	std::cout << "=========== Adventure Mode ===========" << std::endl << std::endl;
-	std::cout << "(0) 1 vs 1" << std::endl;
-	std::cout << "(1) 1 vs AI" << std::endl;
-	std::cout << "(2) AI vs AI" << std::endl;
-	std::cout << "(3) Test Movement" << std::endl;
+	std::cout << "=========== Adventure Mode ===========" << std::endl;
+	AdventureNode* current = nodes[0u];
 
-	int result = -1;
-	while (!(std::cin >> result) || result < 0 || result > 3) {
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	while (current->type != AdventureNode::Type::END) {
+		switch (current->type)
+		{
+		case AdventureNode::Type::TEXT: {
+			// TODO: slow display
+			std::ifstream f(current->text);
+			std::string text((std::istreambuf_iterator<char>(f)),
+				std::istreambuf_iterator<char>());
+			std::cout << std::endl << text << std::endl << std::endl;
+			system("pause");
+			current = nodes[current->to_id];
+		}
+			break;
+		case AdventureNode::Type::BATTLE:
+			std::cout << std::endl << "Aqui hay una batalla" << std::endl;
+			current = nodes[current->to_id];
+			break;
+		case AdventureNode::Type::CHOICE: {
+			int n = 0;
+			std::cout << std::endl;
+			for (auto i = current->choices.begin(); i != current->choices.end(); i++) {
+				std::cout << "(" << n << ") " << (*i)->name << std::endl;
+				n++;
+			}
+
+			std::cout << std::endl;
+
+			int result = -1;
+			while (!(std::cin >> result) || result < 0 || result > current->choices.size()) {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
+			current = nodes[current->choices[result]->to_id];
+		}
+			break;
+		default:
+			break;
+		}
+	}
+
+	system("pause");
+}
+
+void Game::LoadAdventure(const char * path)
+{
+	std::ifstream f(path);
+	nlohmann::json json;
+	f >> json;
+
+	for (auto i = json["Adventure"].begin(); i != json["Adventure"].end(); i++) {
+		std::string type = (*i)["type"];
+		AdventureNode* node = new AdventureNode();
+		node->id = (*i)["id"];
+		if (type.compare("text") == 0) {
+			node->text = (*i).value("text", "null");
+			node->to_id = (*i)["to"];
+			node->type = AdventureNode::Type::TEXT;
+		}
+		else if (type.compare("choice") == 0) {
+			if ((*i).find("choices") != (*i).end()) {
+				for (auto j = (*i)["choices"].begin(); j != (*i)["choices"].end(); j++) {
+					std::string name = (*j).value("name", "null");
+					unsigned int to = (*j)["to"];
+					node->choices.push_back(new Choice(name.c_str(), to));
+				}
+			}
+			node->type = AdventureNode::Type::CHOICE;
+		}
+		else if (type.compare("battle") == 0) {
+			node->to_id = (*i)["to"];
+			node->battle.enemy = (*i).value("enemy", "null");
+			node->type = AdventureNode::Type::BATTLE;
+		}
+		else if (type.compare("end") == 0) {
+			node->type = AdventureNode::Type::END;
+		}
+		else {
+			std::cout << "name in |type| node, " << type << " not correct" << std::endl;
+			assert(true);
+		}
+		assert(nodes.find(node->id) == nodes.end());
+		nodes[node->id] = node;
 	}
 }
 
@@ -148,26 +231,6 @@ void Game::SelectCharacterMenu()
 	system("cls");
 
 	while (battle->DoBattle(characters[0], characters[1], play_mode)) {}
-}
-
-void Game::Update()
-{
-	bool repeat = true;
-	bool write = true;
-	int select = 0;
-	bool down = false;
-	bool up = false;
-	while (repeat) {
-		if (write) {
-			std::cout << "Character 1 turn:" << std::endl;
-			for (int i = 0; i < 3; i++) {
-				if (select == i) std::cout << ">  ";
-				else std::cout << "  ";
-				std::cout << "Choice " << i + 1 << std::endl;
-			}
-			write = false;
-		}
-	}
 }
 
 std::string Game::MainMenuToString(MenuEnum type)

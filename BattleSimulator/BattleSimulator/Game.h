@@ -1,5 +1,7 @@
 #pragma once
+#include <map>
 #include "Character.h"
+#include "AdventureNode.h"
 
 class Battle;
 
@@ -30,8 +32,8 @@ public:
 	void MainMenu();
 	void PlayMenu();
 	void AdventureMenu();
+	void LoadAdventure(const char* path);
 	void SelectCharacterMenu();
-	void Update();
 
 	inline bool IsPlaying() { return playing; }
 
@@ -46,4 +48,6 @@ private:
 	PlayMode play_mode = PlayMode::NONE;
 
 	Battle* battle = nullptr;
+
+	std::map<unsigned int, AdventureNode*> nodes;
 };

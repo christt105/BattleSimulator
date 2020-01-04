@@ -3,7 +3,7 @@
         {
             "type": "text",
             "id": 0,
-            "text": "0.txt",
+            "text": "Adventure/Text/0.txt",
             "to": 1
         },
         {
@@ -13,10 +13,6 @@
                 {
                     "name": "saltar",
                     "to": 2
-                },
-                {
-                    "name": "repetir",
-                    "to": 0
                 }
             ]
         },
@@ -25,7 +21,34 @@
             "id": 2,
             "enemy": "Knight.txt",
             "song": "primal_dialga.mp3",
-            "to": 0
+            "to": 3
+        },
+        {
+            "type": "text",
+            "id": 3,
+            "text": "Adventure/Text/0.txt",
+            "to": 4
+        },
+        {
+            "type": "battle",
+            "id": 4,
+            "enemy": "Knight.txt",
+            "song": "primal_dialga.mp3",
+            "to": 5
+        },        
+        {
+            "type": "choice",
+            "id": 5,
+            "choices": [
+                {
+                    "name": "afsadfasdf",
+                    "to": 0
+                }
+            ]
+        },
+        {
+            "type": "end",
+            "id": 6
         }
     ]
 }

@@ -5,9 +5,10 @@
 #include "Game.h"
 
 int main() {
-	Game game;
-
 	std::srand((int)time(NULL));
+
+	Game game;
+	game.LoadAdventure("Adventure/adventure.json");
 	
 	while (game.IsPlaying()) {
 		game.MainMenu();

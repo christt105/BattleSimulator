@@ -3,35 +3,39 @@
 #include <vector>
 
 struct Choice {
+	Choice(const char* n, unsigned int to) :name(n), to_id(to) {}
+	~Choice() {}
 	std::string name;
 	unsigned int to_id;
 };
 
 struct Combat {
+	Combat() {}
+	~Combat() {}
 	std::string enemy;
 	std::string song;
 };
 
-union Node {
-	std::string text;
-	std::vector<Choice> choices;
-	Combat battle;
-};
-
 class AdventureNode
 {
-	enum Type {
+public:
+	enum class Type {
 		NONE = -1,
-		TEXT, CHOICE, BATTLE,
+		TEXT, CHOICE, BATTLE, END,
 		MAX
 	};
 public:
 	AdventureNode();
 	~AdventureNode();
 
-	//Node node;
+	union {
+		std::string text;
+		Combat battle;
+	};
+	
+	std::vector<Choice*> choices;
 
-	Type type = NONE;
+	Type type = Type::NONE;
 	unsigned int id = 0;
 	unsigned int to_id = 0;
 };
