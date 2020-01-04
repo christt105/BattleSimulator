@@ -15,6 +15,8 @@ public:
 	std::string ToString() const;
 	std::string MovementsToString() const;
 
+	void Reset();
+
 private:
 	int LoadStat(const std::string& line, const char* stat);
 	

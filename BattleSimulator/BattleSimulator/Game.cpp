@@ -75,9 +75,10 @@ void Game::PlayMenu()
 	std::cout << "(1) 1 vs AI" << std::endl;
 	std::cout << "(2) AI vs AI" << std::endl;
 	std::cout << "(3) Test Movement" << std::endl;
+	std::cout << "(4) Test Hundred battles" << std::endl;
 
 	int result = -1;
-	while (!(std::cin >> result) || result < 0 || result > 3) {
+	while (!(std::cin >> result) || result < 0 || result > 4) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
@@ -95,6 +96,9 @@ void Game::PlayMenu()
 		break;
 	case 3:
 		play_mode = PlayMode::TEST_ONE_MOV;
+		break;
+	case 4:
+		play_mode = PlayMode::TEST_HUNDRED_BATTLES;
 		break;
 	default:
 		std::cout << "No play mode for: " << result << std::endl << std::endl;

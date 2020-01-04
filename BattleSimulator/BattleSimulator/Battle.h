@@ -15,6 +15,7 @@ private:
 	bool DoTurn(int n_turn);
 	void DoHvHTurn();
 	void DoHvAITurn();
+	int AIThinkMov(int i);
 	void DoAIvAITurn();
 	void TestMovementTurn();
 
@@ -22,5 +23,6 @@ private:
 	Game::PlayMode mode = Game::PlayMode::NONE;
 
 	int mov_test = -1;
+	int times_mov_test = -1;
 };
 

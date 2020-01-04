@@ -80,6 +80,12 @@ std::string Character::MovementsToString() const
 	return ret;
 }
 
+void Character::Reset()
+{
+	health = health_max;
+	mana = mana_max;
+}
+
 std::string Character::ToString() const
 {
 	return std::string(

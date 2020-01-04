@@ -21,7 +21,7 @@ class Game
 public:
 	enum class PlayMode {
 		NONE = -1,
-		HvsH, HvsAI, AIvsAI, TEST_ONE_MOV, ADVENTURE,
+		HvsH, HvsAI, AIvsAI, TEST_ONE_MOV, TEST_HUNDRED_BATTLES, ADVENTURE,
 		MAX
 	};
 
