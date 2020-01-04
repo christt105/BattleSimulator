@@ -4,16 +4,19 @@
 #include "Game.h"
 #include "Battle.h"
 #include "json.hpp"
+#include "Audio.h"
 
 Game::Game()
 {
 	battle = new Battle();
+	audio = new Audio();
 }
 
 
 Game::~Game()
 {
 	delete battle;
+	delete audio;
 	for (auto i = nodes.begin(); i != nodes.end(); i++) {
 		if ((*i).second->type == AdventureNode::Type::CHOICE)
 			for (auto j = (*i).second->choices.begin(); j != (*i).second->choices.end(); j++)
@@ -31,12 +34,12 @@ void Game::MainMenu()
 	for (int i = 0; i < (int)MenuEnum::MAX; i++)
 		std::cout << "  (" << i << ") " << MainMenuToString((MenuEnum)i) << std::endl;
 
+	audio->Play("Adventure/Audio/dialga.mp3");
 	int result = -1;
 	while (!(std::cin >> result) || result <= (int)MenuEnum::NONE || result >= (int)MenuEnum::MAX) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-
 	switch ((MenuEnum)result)
 	{
 	case Game::MenuEnum::QUIT:
@@ -115,7 +118,7 @@ void Game::AdventureMenu()
 
 	std::cout << "=========== Adventure Mode ===========" << std::endl;
 	AdventureNode* current = nodes[0u];
-
+	
 	while (current->type != AdventureNode::Type::END) {
 		switch (current->type)
 		{

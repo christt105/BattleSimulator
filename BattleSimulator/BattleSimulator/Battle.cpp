@@ -128,9 +128,11 @@ void Battle::DoHvHTurn()
 		std::cout << characters[ch].MovementsToString() << std::endl;
 
 		int result = -1;
-		while (!(std::cin >> result) || result < 0 || result > characters[ch].movements.size() - 1) {
+		while (!(std::cin >> result) || result < 0 || result > characters[ch].movements.size() - 1 || (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0)) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			if (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0)
+				std::cout << "Cannot do Special, not enough mana" << std::endl;
 		}
 
 		if (ch == 0) {
@@ -181,9 +183,11 @@ void Battle::DoHvAITurn()
 	std::cout << characters[0].MovementsToString() << std::endl;
 
 	int result = -1;
-	while (!(std::cin >> result) || result < 0 || result > characters[0].movements.size() - 1) {
+	while (!(std::cin >> result) || result < 0 || result > characters[0].movements.size() - 1 || (result == 1 && characters[0].mana - characters[0].mana_cost < 0)) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		if (result == 1 && characters[0].mana - characters[0].mana_cost < 0)
+			std::cout << "Cannot do Special, not enough mana" << std::endl;
 	}
 	int ai_mov = AIThinkMov(1);
 
@@ -233,11 +237,11 @@ int Battle::AIThinkMov(int i)
 		attacks.push_back(Attack::Type::SPECIAL);
 	}
 	
-	if (characters[i].mana < characters[i].mana_max) {
+	if (characters[i].mana_max - characters[i].mana < characters[i].mana_max * 0.5f) {
 		attacks.push_back(Attack::Type::RELOAD);
 	}
 
-	if (characters[i].health < characters[i].health_max) {
+	if (characters[i].health_max - characters[i].health < characters[i].health_max * 0.5f) {
 		attacks.push_back(Attack::Type::POTION);
 	}
 

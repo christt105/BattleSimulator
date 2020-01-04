@@ -4,6 +4,7 @@
 #include "AdventureNode.h"
 
 class Battle;
+class Audio;
 
 class Game
 {
@@ -48,6 +49,7 @@ private:
 	PlayMode play_mode = PlayMode::NONE;
 
 	Battle* battle = nullptr;
+	Audio* audio = nullptr;
 
 	std::map<unsigned int, AdventureNode*> nodes;
 };
