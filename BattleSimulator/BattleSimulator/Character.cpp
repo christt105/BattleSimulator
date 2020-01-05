@@ -62,8 +62,8 @@ void Character::Load(const char * file)
 		if (movements.empty()) {
 			movements.push_back(new Basic());
 			movements.push_back(new Special());
-			movements.push_back(new Dodge());
 			movements.push_back(new Reload());
+			movements.push_back(new Dodge());
 			movements.push_back(new Potion());
 		}
 	}
@@ -84,6 +84,7 @@ void Character::Reset()
 {
 	health = health_max;
 	mana = mana_max;
+	n_parry = n_max_parry;
 }
 
 std::string Character::ToString() const

@@ -34,7 +34,6 @@ void Game::MainMenu()
 	for (int i = 0; i < (int)MenuEnum::MAX; i++)
 		std::cout << "  (" << i << ") " << MainMenuToString((MenuEnum)i) << std::endl;
 
-	audio->Play("Adventure/Audio/dialga.mp3");
 	int result = -1;
 	while (!(std::cin >> result) || result <= (int)MenuEnum::NONE || result >= (int)MenuEnum::MAX) {
 		std::cin.clear();
@@ -52,6 +51,7 @@ void Game::MainMenu()
 		PlayMenu();
 		break;
 	case Game::MenuEnum::GAME:
+		audio->Play("Adventure/Audio/dialga.mp3");
 		AdventureMenu();
 		break;
 	case Game::MenuEnum::CREDITS:

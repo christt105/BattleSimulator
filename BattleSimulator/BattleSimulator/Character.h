@@ -35,8 +35,14 @@ public:
 	int mana_max		= -1;
 	int mana_cost		= -1;
 
-	int mana_recover	= 30;
+	int mana_recover	= 10;
 	int potion_recover  = 5;
+
+	int n_parry = 3;
+	int n_max_parry = 3;
+
+	bool parry = false;
+	bool parried = false;
 
 	std::vector<Attack*> movements;
 };

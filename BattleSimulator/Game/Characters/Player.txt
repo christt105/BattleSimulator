@@ -1,9 +1,9 @@
 name: Brodinski
 basic_attack: 5
 b_precision: 90
-special_attack: 15
+special_attack: 10
 sp_precision: 75
 speed: 10
-mana: 50
-mana_cost: 10
+mana: 40
+mana_cost: 15
 health: 100

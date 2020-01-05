@@ -14,7 +14,9 @@ private:
 	bool AreCharactersAlive();
 	bool DoTurn(int n_turn);
 	void DoHvHTurn();
+	void DoAttacks(int first_attacker, int second_attacker, int mov1, int mov2);
 	void DoHvAITurn();
+	void CalculateFirstAttacker(int mov1, int mov2);
 	int AIThinkMov(int i);
 	void DoAIvAITurn();
 	void TestMovementTurn();
