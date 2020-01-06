@@ -20,7 +20,7 @@
             "type": "battle",
             "id": 2,
             "enemy": "Characters/Naruto.txt",
-            "song": "primal_dialga.mp3",
+            "song": "Adventure/Audio/dialga.mp3",
             "to": 3
         },
         {
@@ -33,7 +33,7 @@
             "type": "battle",
             "id": 4,
             "enemy": "Characters/Naruto.txt",
-            "song": "primal_dialga.mp3",
+            "song": "Adventure/Audio/dialga.mp3",
             "to": 5
         },        
         {

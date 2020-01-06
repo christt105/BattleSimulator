@@ -30,7 +30,7 @@ void Game::MainMenu()
 	system("cls");
 
 	std::cout << "=========== Main Menu ===========" << std::endl << std::endl;
-
+	audio->Play("Adventure/Audio/menu.mp3");
 	for (int i = 0; i < (int)MenuEnum::MAX; i++)
 		std::cout << "  (" << i << ") " << MainMenuToString((MenuEnum)i) << std::endl;
 
@@ -39,6 +39,9 @@ void Game::MainMenu()
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
+
+	audio->Close();
+
 	switch ((MenuEnum)result)
 	{
 	case Game::MenuEnum::QUIT:
@@ -51,7 +54,6 @@ void Game::MainMenu()
 		PlayMenu();
 		break;
 	case Game::MenuEnum::GAME:
-		audio->Play("Adventure/Audio/dialga.mp3");
 		AdventureMenu();
 		break;
 	case Game::MenuEnum::CREDITS:
@@ -134,11 +136,14 @@ void Game::AdventureMenu()
 			break;
 		case AdventureNode::Type::BATTLE:
 			std::cout << std::endl << "================== Battle Starts ==================" << std::endl << std::endl;
+			audio->Play(current->battle.song.c_str());
 			do
 			{
 			characters[0].Load("Characters/Player.txt");
 			characters[1].Load(current->battle.enemy.c_str());
 			} while (battle->DoBattle(characters[0], characters[1], Game::PlayMode::ADVENTURE));
+
+			audio->Close();
 
 			current = nodes[current->to_id];
 			break;
@@ -196,6 +201,7 @@ void Game::LoadAdventure(const char * path)
 		else if (type.compare("battle") == 0) {
 			node->to_id = (*i)["to"];
 			node->battle.enemy = (*i).value("enemy", "null");
+			node->battle.song = (*i).value("song", "");
 			node->type = AdventureNode::Type::BATTLE;
 		}
 		else if (type.compare("end") == 0) {
