@@ -155,11 +155,13 @@ void Battle::DoHvHTurn()
 			std::cout << "Player " << ch + 1 << " " << characters[ch].name << " select a movement:" << std::endl;
 			std::cout << characters[ch].MovementsToString() << std::endl;
 
-			while (!(std::cin >> result) || result < 0 || result > characters[ch].movements.size() - 1 || (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0) || (result == 4 && characters[ch].n_potions <= 0)) {
+			while (!(std::cin >> result) || result < 0 || result > characters[ch].movements.size() - 1 || (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0) || (result == 4 && characters[ch].n_potions <= 0) || (result == 3 && characters[ch].n_parry <= 0)) {
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				if (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0)
 					std::cout << red << "Cannot do Special, not enough mana" << white << std::endl;
+				if (result == 3 && characters[ch].n_parry <= 0)
+					std::cout << red << "Cannot use Parry, character does not have more parrys to do" << white << std::endl;
 				if (result == 4 && characters[ch].n_potions <= 0)
 					std::cout << red << "Cannot use Potion, character does not have any potion" << white << std::endl;
 			}
@@ -206,11 +208,13 @@ void Battle::DoHvAITurn()
 		std::cout << "Player " << characters[0].name << " select a movement:" << std::endl;
 		std::cout << characters[0].MovementsToString() << std::endl;
 
-		while (!(std::cin >> mov1) || mov1 < 0 || mov1 > characters[0].movements.size() - 1 || (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0) || (mov1 == 4 && characters[0].n_potions <= 0)) {
+		while (!(std::cin >> mov1) || mov1 < 0 || mov1 > characters[0].movements.size() - 1 || (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0) || (mov1 == 4 && characters[0].n_potions <= 0) || (mov1 == 3 && characters[0].n_parry <= 0)) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			if (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0)
 				std::cout << red << "Cannot do Special, not enough mana" << white << std::endl;
+			if (mov1 == 3 && characters[0].n_parry <= 0)
+				std::cout << red << "Cannot use Parry, character does not have more parrys to do" << white << std::endl;
 			if (mov1 == 4 && characters[0].n_potions <= 0)
 				std::cout << red << "Cannot use Potion, character does not have any potion" << white << std::endl;
 		}
