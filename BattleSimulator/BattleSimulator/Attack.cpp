@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Attack.h"
 #include "Character.h"
+#include "Game.h"
+#include "Audio.h"
 
 std::string Attack::ToString() const
 {
@@ -12,6 +14,7 @@ bool Basic::DoAttack(Character * attacker, Character * objective)
 	int r_precision = rand() % 100 + 1;
 	if (r_precision <= attacker->b_precision) { //precision
 		objective->health -= attacker->b_attack;
+		game->audio->PlayFX("Adventure/Audio/tackle.mp3");
 		return true;
 	}
 	std::cout << attacker->name << " failed basic attack" << std::endl;

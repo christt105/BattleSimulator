@@ -43,13 +43,15 @@ private:
 
 public:
 	Character characters[2];
+	Audio* audio = nullptr;
 
 private:
 	bool playing = true;
 	PlayMode play_mode = PlayMode::NONE;
 
 	Battle* battle = nullptr;
-	Audio* audio = nullptr;
 
 	std::map<unsigned int, AdventureNode*> nodes;
 };
+
+extern Game* game;

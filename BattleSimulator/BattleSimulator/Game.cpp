@@ -42,7 +42,7 @@ void Game::MainMenu()
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 
-	audio->Close();
+	audio->Stop();
 
 	switch ((MenuEnum)result)
 	{
@@ -151,7 +151,7 @@ void Game::AdventureMenu()
 			characters[1].Load(current->battle.enemy.c_str());
 			} while (battle->DoBattle(characters[0], characters[1], Game::PlayMode::ADVENTURE));
 
-			audio->Close();
+			audio->Stop();
 
 			current = nodes[current->to_id];
 			break;

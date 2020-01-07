@@ -4,18 +4,22 @@
 #include "Character.h"
 #include "Game.h"
 
+Game* game = nullptr;
+
 int main() {
 	std::srand((int)time(NULL));
 
-	Game game;
-	game.LoadAdventure("Adventure/adventure.json");
+	game = new Game();
+	game->LoadAdventure("Adventure/adventure.json");
 	
-	while (game.IsPlaying()) {
-		game.MainMenu();
+	while (game->IsPlaying()) {
+		game->MainMenu();
 	}
 
 	getchar();
 	system("pause");
+
+	delete game;
 
 	return 0;
 }
