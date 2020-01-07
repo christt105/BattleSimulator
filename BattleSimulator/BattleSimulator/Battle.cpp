@@ -352,7 +352,7 @@ int Battle::AIThinkMov(int charac)
 		attacks.push_back(Attack::Type::SPECIAL);
 	}
 
-	if (characters[charac].mana_max - characters[charac].mana < characters[charac].mana_max * 0.5f) {
+	if (characters[charac].mana < characters[charac].mana_max * 0.5f) {
 		attacks.push_back(Attack::Type::RELOAD);
 	}
 
@@ -360,9 +360,9 @@ int Battle::AIThinkMov(int charac)
 		attacks.push_back(Attack::Type::DODGE);
 	}
 
-	if (characters[charac].n_potions > 0 && characters[charac].health_max - characters[charac].health < characters[charac].health_max * 0.5f) {
+	if (characters[charac].n_potions > 0 && characters[charac].health < characters[charac].health_max * 0.5f) {
 		attacks.push_back(Attack::Type::POTION);
-		if(characters[charac].health_max - characters[charac].health < characters[charac].health_max * 0.25f)
+		if(characters[charac].health < characters[charac].health_max * 0.25f)
 			attacks.push_back(Attack::Type::POTION); // if is under 25% would be recommended to use a potion
 	}
 
