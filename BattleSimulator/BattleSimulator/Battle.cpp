@@ -362,6 +362,8 @@ int Battle::AIThinkMov(int charac)
 
 	if (characters[charac].n_potions > 0 && characters[charac].health_max - characters[charac].health < characters[charac].health_max * 0.5f) {
 		attacks.push_back(Attack::Type::POTION);
+		if(characters[charac].health_max - characters[charac].health < characters[charac].health_max * 0.25f)
+			attacks.push_back(Attack::Type::POTION); // if is under 25% would be recommended to use a potion
 	}
 
 	return (int)attacks[rand() % attacks.size()];

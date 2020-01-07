@@ -100,7 +100,7 @@ std::string Character::ToString() const
 		"sp_attack: " + std::to_string(sp_attack) + " precision: " + std::to_string(sp_precision) + " cost: " + std::to_string(mana_cost) + '\n' +
 		"mana: " + std::to_string(mana) + '/' + std::to_string(mana_max) + '\n' +
 		"potions: " + std::to_string(n_potions) + '\n' +
-		"dodges: " + std::to_string(n_parry) + '\n' +
+		"parrys: " + std::to_string(n_parry) + '\n' +
 		"speed: " + std::to_string(speed) + '\n'
 	);
 }
