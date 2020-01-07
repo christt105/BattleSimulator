@@ -19,6 +19,7 @@
         {
             "type": "battle",
             "id": 2,
+            "player": "Characters/Player.txt",
             "enemy": "Characters/Naruto.txt",
             "song": "Adventure/Audio/dialga.mp3",
             "to": 3
@@ -32,6 +33,7 @@
         {
             "type": "battle",
             "id": 4,
+            "player": "Characters/Player.txt",
             "enemy": "Characters/Naruto.txt",
             "song": "Adventure/Audio/dialga.mp3",
             "to": 5

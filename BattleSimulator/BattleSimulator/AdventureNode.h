@@ -12,6 +12,7 @@ struct Choice {
 struct Combat {
 	Combat() {}
 	~Combat() {}
+	std::string player;
 	std::string enemy;
 	std::string song;
 };
@@ -25,8 +26,8 @@ public:
 		MAX
 	};
 public:
-	AdventureNode();
-	~AdventureNode();
+	AdventureNode() {}
+	~AdventureNode() {}
 
 	union {
 		std::string text;

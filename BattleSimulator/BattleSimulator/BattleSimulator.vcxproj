@@ -119,7 +119,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdventureNode.cpp" />
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Battle.cpp" />

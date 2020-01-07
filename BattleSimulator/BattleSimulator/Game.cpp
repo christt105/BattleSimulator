@@ -139,7 +139,7 @@ void Game::AdventureMenu()
 			audio->Play(current->battle.song.c_str());
 			do
 			{
-			characters[0].Load("Characters/Player.txt");
+			characters[0].Load(current->battle.player.c_str());
 			characters[1].Load(current->battle.enemy.c_str());
 			} while (battle->DoBattle(characters[0], characters[1], Game::PlayMode::ADVENTURE));
 
@@ -200,6 +200,7 @@ void Game::LoadAdventure(const char * path)
 		}
 		else if (type.compare("battle") == 0) {
 			node->to_id = (*i)["to"];
+			node->battle.player = (*i).value("player", "Characters/Player.txt");
 			node->battle.enemy = (*i).value("enemy", "null");
 			node->battle.song = (*i).value("song", "");
 			node->type = AdventureNode::Type::BATTLE;

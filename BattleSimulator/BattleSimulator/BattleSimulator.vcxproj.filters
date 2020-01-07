@@ -36,9 +36,6 @@
     <ClCompile Include="Attack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AdventureNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
