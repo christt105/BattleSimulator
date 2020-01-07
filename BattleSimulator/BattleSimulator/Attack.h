@@ -56,7 +56,7 @@ class Dodge
 	: public Attack
 {
 public:
-	Dodge() : Attack("Dodge", DODGE) {}
+	Dodge() : Attack("Parry", DODGE) {}
 	~Dodge() {}
 
 	bool DoAttack(Character* attacker, Character* objective) override;
