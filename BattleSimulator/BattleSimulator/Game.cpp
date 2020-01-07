@@ -1,3 +1,5 @@
+#define NOMINMAX
+#include <Windows.h>
 #include <iostream>
 #include <experimental/filesystem>
 #include <fstream>
@@ -125,11 +127,17 @@ void Game::AdventureMenu()
 		switch (current->type)
 		{
 		case AdventureNode::Type::TEXT: {
-			// TODO: slow display
 			std::ifstream f(current->text);
 			std::string text((std::istreambuf_iterator<char>(f)),
 				std::istreambuf_iterator<char>());
-			std::cout << std::endl << text << std::endl << std::endl;
+			auto c = text.begin();
+			std::cout << std::endl;
+			while (c != text.end()) {
+				std::cout << *c;
+				Sleep(10);
+				c++;
+			}
+			std::cout << std::endl << std::endl;
 			system("pause");
 			current = nodes[current->to_id];
 		}
