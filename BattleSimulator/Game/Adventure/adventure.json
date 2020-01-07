@@ -7,50 +7,194 @@
             "to": 1
         },
         {
-            "type": "choice",
+            "type": "text",
             "id": 1,
-            "choices": [
-                {
-                    "name": "saltar",
-                    "to": 2
-                }
-            ]
+            "text": "Adventure/Text/1.txt",
+            "to": 2
         },
         {
-            "type": "battle",
+            "type": "choice",
             "id": 2,
-            "player": "Characters/Player.txt",
-            "enemy": "Characters/Naruto.txt",
-            "song": "Adventure/Audio/dialga.mp3",
-            "to": 3
+            "choices": [
+                {
+                    "name": "Buscar supervivientes",
+                    "to": 3
+                },
+                {
+                    "name": "Buscar por la mini isla",
+                    "to": 4
+                }
+            ]
         },
         {
             "type": "text",
             "id": 3,
-            "text": "Adventure/Text/0.txt",
-            "to": 4
+            "text": "Adventure/Text/3.txt",
+            "to": 2
+        },
+        {
+            "type": "text",
+            "id": 4,
+            "text": "Adventure/Text/5.txt",
+            "to": 5
+        },
+        {
+            "type": "text",
+            "id": 5,
+            "text": "Adventure/Text/6.txt",
+            "to": 6
         },
         {
             "type": "battle",
-            "id": 4,
+            "id": 6,
             "player": "Characters/Player.txt",
             "enemy": "Characters/Naruto.txt",
             "song": "Adventure/Audio/dialga.mp3",
-            "to": 5
-        },        
+            "to": 7
+        },
+        {
+            "type": "text",
+            "id": 7,
+            "text": "Adventure/Text/victory1.txt",
+            "to": 8
+        },
+        {
+            "type": "text",
+            "id": 8,
+            "text": "Adventure/Text/7.txt",
+            "to": 9
+        },
         {
             "type": "choice",
-            "id": 5,
+            "id": 9,
             "choices": [
                 {
-                    "name": "afsadfasdf",
-                    "to": 6
+                    "name": "Arrancarle del pecho un traductor al robot derrotado",
+                    "to": 10
+                },
+                {
+                    "name": "Irse",
+                    "to": 11
                 }
             ]
         },
         {
+            "type": "text",
+            "id": 10,
+            "text": "Adventure/Text/8.txt",
+            "to": 12
+        },
+        {
+            "type": "text",
+            "id": 11,
+            "text": "Adventure/Text/9.txt",
+            "to": 12
+        },
+        {
+            "type": "text",
+            "id": 12,
+            "text": "Adventure/Text/10.txt",
+            "to": 13
+        },
+        {
+            "type": "battle",
+            "id": 13,
+            "player": "Characters/Player.txt",
+            "enemy": "Characters/Naruto.txt",
+            "song": "Adventure/Audio/dialga.mp3",
+            "to": 14
+        },
+        {
+            "type": "text",
+            "id": 14,
+            "text": "Adventure/Text/victory2.txt",
+            "to": 15
+        },
+        {
+            "type": "text",
+            "id": 15,
+            "text": "Adventure/Text/11.txt",
+            "to": 16
+        },
+        {
+            "type": "text",
+            "id": 16,
+            "text": "Adventure/Text/12.txt",
+            "to": 17
+        },
+        {
+            "type": "text",
+            "id": 17,
+            "text": "Adventure/Text/13.txt",
+            "to": 18
+        },
+        {
+            "type": "text",
+            "id": 18,
+            "text": "Adventure/Text/14.txt",
+            "to": 19
+        },
+        {
+            "type": "text",
+            "id": 19,
+            "text": "Adventure/Text/15.txt",
+            "to": 20
+        },
+        {
+            "type": "choice",
+            "id": 20,
+            "choices": [
+                {
+                    "name": "Atravesar un antiguo campamento",
+                    "to": 21
+                },
+                {
+                    "name": "Seguir el rastro del río",
+                    "to": 25
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": 21,
+            "text": "Adventure/Text/16.txt",
+            "to": 22
+        },
+        {
+            "type": "text",
+            "id": 22,
+            "text": "Adventure/Text/17.txt",
+            "to": 23
+        },
+        {
+            "type": "battle",
+            "id": 23,
+            "player": "Characters/Player.txt",
+            "enemy": "Characters/Naruto.txt",
+            "song": "Adventure/Audio/dialga.mp3",
+            "to": 24
+        },
+        {
+            "type": "text",
+            "id": 24,
+            "text": "Adventure/Text/victory3.txt",
+            "to": 25
+        },
+        {
+            "type": "text",
+            "id": 25,
+            "text": "Adventure/Text/18.txt",
+            "to": 26
+        },
+        {
+            "type": "text",
+            "id": 26,
+            "text": "Adventure/Text/19.txt",
+            "to": 27
+        },
+        {
             "type": "end",
-            "id": 6
+            "id": 27
         }
     ]
 }
