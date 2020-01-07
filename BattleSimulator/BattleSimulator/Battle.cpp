@@ -1,6 +1,7 @@
+#define NOMINMAX
 #include "Battle.h"
 #include "Game.h"
-#include <iostream>
+#include "ConsoleColor.h"
 
 
 Battle::Battle()
@@ -43,11 +44,11 @@ bool Battle::DoBattle(const Character & character1, const Character & character2
 
 		if (mode == Game::PlayMode::ADVENTURE) {
 			if (ch_wins != 0) {
-				std::cout << "DEFEAT, restarting battle" << std::endl;
+				std::cout << red << "DEFEAT, restarting battle" << white << std::endl;
 				return true;
 			}
 			else {
-				std::cout << "Brodinski won" << std::endl;
+				std::cout << yellow << "Brodinski won" << white << std::endl;
 			}
 		}
 		else {
@@ -95,7 +96,11 @@ bool Battle::AreCharactersAlive()
 
 bool Battle::DoTurn(int n_turn)
 {
-	std::cout << "Turn number " << n_turn  << ", characters:" << std::endl << std::endl << characters[0].ToString() << std::endl << std::endl << characters[1].ToString() << std::endl << std::endl;
+	std::cout << "Turn number " << blue << n_turn << white << ", characters:" << std::endl << std::endl;
+	characters[0].PrintStats();
+	std::cout << std::endl << std::endl;
+	characters[1].PrintStats();
+	std::cout << std::endl << std::endl;
 
 	switch (mode)
 	{
@@ -126,7 +131,7 @@ void Battle::DoHvHTurn()
 	for (int ch = 0; ch < 2; ch++) {
 		int result = -1;
 		if (characters[ch].parried) {
-			std::cout << "Player " << ch + 1 << " " << characters[ch].name << " got parried on last turn, cannot attack in this turn" << std::endl;
+			std::cout << yellow << "Player " << ch + 1 << " " << characters[ch].name << " got parried on last turn, cannot attack in this turn" << white << std::endl;
 		}
 		else if (characters[ch].parry) {
 			std::cout << "Player " << ch + 1 << " " << characters[ch].name << " select a movement after have done parry:" << std::endl;
@@ -138,7 +143,7 @@ void Battle::DoHvHTurn()
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				if (result == 2 && characters[ch].n_potions <= 0)
-					std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
+					std::cout << red << "Cannot use Potion, character does not have any potion" << white << std::endl;
 			}
 
 			if (result == 1) //need to parse to normal attacks order
@@ -154,9 +159,9 @@ void Battle::DoHvHTurn()
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				if (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0)
-					std::cout << "Cannot do Special, not enough mana" << std::endl;
+					std::cout << red << "Cannot do Special, not enough mana" << white << std::endl;
 				if (result == 4 && characters[ch].n_potions <= 0)
-					std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
+					std::cout << red << "Cannot use Potion, character does not have any potion" << white << std::endl;
 			}
 		}
 		if (ch == 0) {
@@ -177,7 +182,7 @@ void Battle::DoHvAITurn()
 
 	//Player
 	if (characters[0].parried) {
-		std::cout << "Player " << characters[0].name << " got parried on last turn, cannot attack in this turn" << std::endl;
+		std::cout << red << "Player " << characters[0].name << " got parried on last turn, cannot attack in this turn" << white << std::endl;
 	}
 	else if (characters[0].parry) {
 		std::cout << "Player " << characters[0].name << " select a movement after have done parry:" << std::endl;
@@ -189,7 +194,7 @@ void Battle::DoHvAITurn()
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			if (mov1 == 2 && characters[0].n_potions <= 0)
-				std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
+				std::cout << red << "Cannot use Potion, character does not have any potion" << white << std::endl;
 		}
 
 		if (mov1 == 1) //need to parse to normal attacks order
@@ -205,14 +210,14 @@ void Battle::DoHvAITurn()
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			if (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0)
-				std::cout << "Cannot do Special, not enough mana" << std::endl;
+				std::cout << red << "Cannot do Special, not enough mana" << white << std::endl;
 			if (mov1 == 4 && characters[0].n_potions <= 0)
-				std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
+				std::cout << red << "Cannot use Potion, character does not have any potion" << white << std::endl;
 		}
 	}
 	//AI
 	if (characters[1].parried) {
-		std::cout << characters[1].name << " got parried on last turn, cannot attack in this turn" << std::endl;
+		std::cout << red << characters[1].name << " got parried on last turn, cannot attack in this turn" << white << std::endl;
 	}
 	else if (characters[1].parry) {
 		mov2 = (characters[1].n_potions <= 0) ? rand() % 2 : rand() % 3;
@@ -236,7 +241,7 @@ void Battle::DoAIvAITurn()
 	int mov2 = -1;
 	for (int i = 0; i < 2; i++) {
 		if (characters[i].parried) {
-			std::cout << characters[i].name << " got parried on last turn, cannot attack in this turn" << std::endl;
+			std::cout << red << characters[i].name << " got parried on last turn, cannot attack in this turn" << white << std::endl;
 		}
 		else if (characters[i].parry) {
 			mov2 = (characters[i].n_potions <= 0) ? rand() % 2 : rand() % 3;
@@ -313,13 +318,13 @@ void Battle::CalculateFirstAttacker(int mov1, int mov2)
 void Battle::DoAttacks(int first_attacker, int second_attacker, int mov1, int mov2)
 {
 	if (mov1 == Attack::Type::DODGE && (mov2 == Attack::Type::BASIC || mov2 == Attack::Type::SPECIAL)) {
-		std::cout << characters[first_attacker].name << " made a parry" << std::endl;
+		std::cout << green << characters[first_attacker].name << " made a parry" << white << std::endl;
 		characters[first_attacker].n_parry--;
 		characters[first_attacker].parry = true;
 		characters[second_attacker].parried = true;
 	}
 	else if (mov2 == Attack::Type::DODGE && (mov1 == Attack::Type::BASIC || mov1 == Attack::Type::SPECIAL)) {
-		std::cout << characters[second_attacker].name << " made a parry" << std::endl;
+		std::cout << green << characters[second_attacker].name << " made a parry" << white << std::endl;
 		characters[second_attacker].n_parry--;
 		characters[second_attacker].parry = true;
 		characters[first_attacker].parried = true;

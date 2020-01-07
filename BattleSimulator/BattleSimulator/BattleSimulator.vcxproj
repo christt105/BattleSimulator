@@ -133,6 +133,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Turn.h" />

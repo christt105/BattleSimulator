@@ -12,6 +12,7 @@ public:
 
 	void Load(const char* file);
 
+	void PrintStats() const;
 	std::string ToString() const;
 	std::string MovementsToString() const;
 

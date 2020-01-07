@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "ConsoleColor.h"
 #include <fstream>
 #include <iostream>
 
@@ -89,6 +90,41 @@ void Character::Reset()
 	mana = mana_max;
 	n_parry = n_max_parry;
 	n_potions = start_potions;
+}
+
+void Character::PrintStats() const
+{
+	std::cout << name << std::endl;
+	if (health <= health_max * 0.5f) {
+		if (health <= health_max * 0.25f) {
+			std::cout << red;
+		}
+		else {
+			std::cout << yellow;
+		}
+	}
+	std::cout << "health: " << health << '/' << health_max << white << std::endl
+		<< "basic attack: " << b_attack << " precision: " << b_precision << std::endl;
+	if (mana - mana_cost < 0) {
+		std::cout << red;
+	}
+	std::cout << "special attack: " << sp_attack << " precision: " << sp_precision << " cost: " << mana_cost << white << std::endl;
+	if (mana <= mana_max * 0.5f) {
+		if (mana <= mana_max * 0.25f) {
+			std::cout << red;
+		}
+		else {
+			std::cout << yellow;
+		}
+	}
+	std::cout << "mana: " << mana << '/' << mana_max << white << std::endl;
+	if (n_potions <= 0)
+		std::cout << red;
+	std::cout << "potions: " << n_potions << white << std::endl;
+	if (n_parry <= 0)
+		std::cout << red;
+	std::cout << "parrys: " << n_parry << white << std::endl
+		<< "speed: " << speed << std::endl;
 }
 
 std::string Character::ToString() const
