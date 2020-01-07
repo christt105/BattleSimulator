@@ -57,6 +57,9 @@ void Character::Load(const char * file)
 			else if (line.find("mana_cost:") != std::string::npos) {
 				mana_cost = LoadStat(line, "mana_cost:");
 			}
+			else if (line.find("potions:") != std::string::npos) {
+				start_potions = n_potions = LoadStat(line, "potions:");
+			}
 		}
 		f.close();
 		if (movements.empty()) {
@@ -85,6 +88,7 @@ void Character::Reset()
 	health = health_max;
 	mana = mana_max;
 	n_parry = n_max_parry;
+	n_potions = start_potions;
 }
 
 std::string Character::ToString() const
@@ -95,6 +99,8 @@ std::string Character::ToString() const
 		"b_attack: " + std::to_string(b_attack) + " precision: " + std::to_string(b_precision) + '\n' +
 		"sp_attack: " + std::to_string(sp_attack) + " precision: " + std::to_string(sp_precision) + " cost: " + std::to_string(mana_cost) + '\n' +
 		"mana: " + std::to_string(mana) + '/' + std::to_string(mana_max) + '\n' +
+		"potions: " + std::to_string(n_potions) + '\n' +
+		"dodges: " + std::to_string(n_parry) + '\n' +
 		"speed: " + std::to_string(speed) + '\n'
 	);
 }

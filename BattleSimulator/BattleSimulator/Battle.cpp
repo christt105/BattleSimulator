@@ -134,9 +134,11 @@ void Battle::DoHvHTurn()
 			std::cout << "(1) Reload" << std::endl;
 			std::cout << "(2) Potion" << std::endl;
 
-			while (!(std::cin >> result) || result < 0 || result > 2) {
+			while (!(std::cin >> result) || result < 0 || result > 2 || (result == 2 && characters[ch].n_potions <= 0)) {
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				if (result == 2 && characters[ch].n_potions <= 0)
+					std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
 			}
 
 			if (result == 1) //need to parse to normal attacks order
@@ -148,11 +150,13 @@ void Battle::DoHvHTurn()
 			std::cout << "Player " << ch + 1 << " " << characters[ch].name << " select a movement:" << std::endl;
 			std::cout << characters[ch].MovementsToString() << std::endl;
 
-			while (!(std::cin >> result) || result < 0 || result > characters[ch].movements.size() - 1 || (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0)) {
+			while (!(std::cin >> result) || result < 0 || result > characters[ch].movements.size() - 1 || (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0) || (result == 4 && characters[ch].n_potions <= 0)) {
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				if (result == 1 && characters[ch].mana - characters[ch].mana_cost < 0)
 					std::cout << "Cannot do Special, not enough mana" << std::endl;
+				if (result == 4 && characters[ch].n_potions <= 0)
+					std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
 			}
 		}
 		if (ch == 0) {
@@ -181,9 +185,11 @@ void Battle::DoHvAITurn()
 		std::cout << "(1) Reload" << std::endl;
 		std::cout << "(2) Potion" << std::endl;
 
-		while (!(std::cin >> mov1) || mov1 < 0 || mov1 > 2) {
+		while (!(std::cin >> mov1) || mov1 < 0 || mov1 > 2 || (mov1 == 2 && characters[0].n_potions <= 0)) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			if (mov1 == 2 && characters[0].n_potions <= 0)
+				std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
 		}
 
 		if (mov1 == 1) //need to parse to normal attacks order
@@ -195,11 +201,13 @@ void Battle::DoHvAITurn()
 		std::cout << "Player " << characters[0].name << " select a movement:" << std::endl;
 		std::cout << characters[0].MovementsToString() << std::endl;
 
-		while (!(std::cin >> mov1) || mov1 < 0 || mov1 > characters[0].movements.size() - 1 || (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0)) {
+		while (!(std::cin >> mov1) || mov1 < 0 || mov1 > characters[0].movements.size() - 1 || (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0) || (mov1 == 4 && characters[0].n_potions <= 0)) {
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			if (mov1 == 1 && characters[0].mana - characters[0].mana_cost < 0)
 				std::cout << "Cannot do Special, not enough mana" << std::endl;
+			if (mov1 == 4 && characters[0].n_potions <= 0)
+				std::cout << "Cannot use Potion, character does not have any potion" << std::endl;
 		}
 	}
 	//AI
@@ -207,7 +215,7 @@ void Battle::DoHvAITurn()
 		std::cout << characters[1].name << " got parried on last turn, cannot attack in this turn" << std::endl;
 	}
 	else if (characters[1].parry) {
-		mov2 = rand() % 3;
+		mov2 = (characters[1].n_potions <= 0) ? rand() % 2 : rand() % 3;
 
 		if (mov2 == 1) //need to parse to normal attacks order
 			mov2 = 2;
@@ -231,7 +239,7 @@ void Battle::DoAIvAITurn()
 			std::cout << characters[i].name << " got parried on last turn, cannot attack in this turn" << std::endl;
 		}
 		else if (characters[i].parry) {
-			mov2 = rand() % 3;
+			mov2 = (characters[i].n_potions <= 0) ? rand() % 2 : rand() % 3;
 
 			if (i == 0) {
 				if (mov1 == 1) //need to parse to normal attacks order
@@ -278,7 +286,13 @@ void Battle::TestMovementTurn()
 
 void Battle::CalculateFirstAttacker(int mov1, int mov2)
 {
-	if (characters[0].speed > characters[1].speed) {
+	if (mov1 == Attack::POTION) {
+		DoAttacks(0, 1, mov1, mov2);
+	}
+	else if (mov2 == Attack::POTION) {
+		DoAttacks(1, 0, mov2, mov1);
+	}
+	else if (characters[0].speed > characters[1].speed) {
 		DoAttacks(0, 1, mov1, mov2);
 	}
 	else if (characters[1].speed > characters[0].speed) {
@@ -300,11 +314,13 @@ void Battle::DoAttacks(int first_attacker, int second_attacker, int mov1, int mo
 {
 	if (mov1 == Attack::Type::DODGE && (mov2 == Attack::Type::BASIC || mov2 == Attack::Type::SPECIAL)) {
 		std::cout << characters[first_attacker].name << " made a parry" << std::endl;
+		characters[first_attacker].n_parry--;
 		characters[first_attacker].parry = true;
 		characters[second_attacker].parried = true;
 	}
 	else if (mov2 == Attack::Type::DODGE && (mov1 == Attack::Type::BASIC || mov1 == Attack::Type::SPECIAL)) {
 		std::cout << characters[second_attacker].name << " made a parry" << std::endl;
+		characters[second_attacker].n_parry--;
 		characters[second_attacker].parry = true;
 		characters[first_attacker].parried = true;
 	}
@@ -340,7 +356,11 @@ int Battle::AIThinkMov(int charac)
 		attacks.push_back(Attack::Type::RELOAD);
 	}
 
-	if (characters[charac].health_max - characters[charac].health < characters[charac].health_max * 0.5f) {
+	if (characters[charac].n_parry > 0) {
+		attacks.push_back(Attack::Type::DODGE);
+	}
+
+	if (characters[charac].n_potions > 0 && characters[charac].health_max - characters[charac].health < characters[charac].health_max * 0.5f) {
 		attacks.push_back(Attack::Type::POTION);
 	}
 

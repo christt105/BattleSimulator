@@ -38,6 +38,9 @@ public:
 	int mana_recover	= 10;
 	int potion_recover  = 5;
 
+	int n_potions = 0;
+	int start_potions = 0;
+
 	int n_parry = 3;
 	int n_max_parry = 3;
 

@@ -7,3 +7,4 @@ speed: 10
 mana: 40
 mana_cost: 15
 health: 100
+potions: 5

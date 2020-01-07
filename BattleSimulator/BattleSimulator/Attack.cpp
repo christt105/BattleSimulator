@@ -45,6 +45,7 @@ bool Reload::DoAttack(Character * attacker, Character * objective)
 
 bool Dodge::DoAttack(Character * attacker, Character * objective)
 {
+	attacker->n_parry--;
 	return true;
 }
 
@@ -56,6 +57,7 @@ bool Potion::DoAttack(Character * attacker, Character * objective)
 	else {
 		attacker->health += attacker->potion_recover;
 	}
+	attacker->n_potions--;
 
 	return true;
 }
