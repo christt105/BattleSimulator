@@ -4,7 +4,7 @@
       "type": "text",
       "id": 0,
       "text": "Adventure/Text/0.txt",
-      "to": 34
+      "to": 101
     },
     {
       "type": "text",
@@ -765,14 +765,22 @@
       ]
     },
     {
-      "type": "end",
+      "type": "text",
       "id": 102,
-      "text": "Adventure/Text/71.txt"
+      "text": "Adventure/Text/72.txt",
+      "to": 104
+    },
+    {
+      "type": "text",
+      "id": 103,
+      "text": "Adventure/Text/71.txt",
+      "to": 104
     },
     {
       "type": "end",
-      "id": 103,
-      "text": "Adventure/Text/72.txt"
+      "id": 104,
+      "text": "Adventure/Text/1.txt"
+
     }
   ]
 }
