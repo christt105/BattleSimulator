@@ -1,0 +1,10 @@
+name: Tres Soldados Rasos, uno encima del otro 
+basic_attack: 10
+b_precision: 50
+special_attack: 0
+sp_precision: 0
+speed: 20
+mana: 30
+mana_cost: 30
+health: 75
+potions: 0

@@ -1,0 +1,10 @@
+name: Rob0t High Rank
+basic_attack: 3
+b_precision: 90
+special_attack: 10
+sp_precision: 100
+speed: 1000
+mana: 100
+mana_cost: 25
+health: 150
+potions: 3

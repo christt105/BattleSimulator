@@ -4,7 +4,7 @@
       "type": "text",
       "id": 0,
       "text": "Adventure/Text/0.txt",
-      "to": 101
+      "to": 1
     },
     {
       "type": "text",
@@ -48,7 +48,7 @@
       "type": "battle",
       "id": 6,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/Rob0tRasoAveriado.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 7
     },
@@ -100,7 +100,7 @@
       "type": "battle",
       "id": 13,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/SoldadosRasos.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 14
     },
@@ -170,7 +170,7 @@
       "type": "battle",
       "id": 23,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/JabbatheJAT.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 24
     },
@@ -282,7 +282,7 @@
       "type": "battle",
       "id": 36,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/BandidoDestripador.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 37
     },
@@ -302,7 +302,7 @@
       "type": "battle",
       "id": 39,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/PlantusBorrachus.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 40
     },
@@ -430,7 +430,7 @@
       "type": "battle",
       "id": 56,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/Lynna.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 57
     },
@@ -532,7 +532,7 @@
       "type": "battle",
       "id": 70,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/Rob0tAltoRago.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 71
     },
@@ -728,7 +728,7 @@
       "type": "battle",
       "id": 97,
       "player": "Characters/Player.txt",
-      "enemy": "Characters/Naruto.txt",
+      "enemy": "Characters/Dikstra.txt",
       "song": "Adventure/Audio/dialga.mp3",
       "to": 98
     },

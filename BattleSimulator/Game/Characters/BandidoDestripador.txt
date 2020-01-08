@@ -1,0 +1,10 @@
+name: Bandido Destripador
+basic_attack: 5
+b_precision: 50
+special_attack: 10
+sp_precision: 100
+speed: 70
+mana: 100
+mana_cost: 10
+health: 105
+potions: 2

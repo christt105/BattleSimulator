@@ -1,0 +1,10 @@
+name: Jabba the JAT(Java Astrodynamics Toolkit)
+basic_attack: 3
+b_precision: 60
+special_attack: 15
+sp_precision: 100
+speed: 1
+mana: 50
+mana_cost: 25
+health: 60
+potions: 1

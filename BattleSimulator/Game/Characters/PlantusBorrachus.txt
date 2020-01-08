@@ -1,0 +1,10 @@
+name: Plantus Borrachus
+basic_attack: 1
+b_precision: 100
+special_attack: 30
+sp_precision: 50
+speed: 50
+mana: 10
+mana_cost: 10
+health: 30
+potions: 5
