@@ -19,7 +19,7 @@ bool Battle::DoBattle(const Character & character1, const Character & character2
 	characters[1] = character2;
 	this->mode = mode;
 
-	if (mode == Game::PlayMode::TEST_ONE_MOV) {
+	if (mode == Game::PlayMode::TEST_ONE_MOV || mode == Game::PlayMode::TEST_STAT) {
 		std::cout << "Select a movement you want to test:" << std::endl;
 		std::cout << characters[0].MovementsToString() << std::endl;
 
@@ -28,14 +28,16 @@ bool Battle::DoBattle(const Character & character1, const Character & character2
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 
-		std::cout << "How many times do you want to test:" << std::endl << std::endl;
+		if (mode == Game::PlayMode::TEST_ONE_MOV) {
+			std::cout << "How many times do you want to test:" << std::endl << std::endl;
 
-		while (!(std::cin >> times_mov_test) || times_mov_test < 0) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			while (!(std::cin >> times_mov_test) || times_mov_test < 0) {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
 		}
 	}
-	if (mode != Game::PlayMode::TEST_HUNDRED_BATTLES  && mode != Game::PlayMode::TEST_ONE_MOV) {
+	if (mode != Game::PlayMode::TEST_HUNDRED_BATTLES  && mode != Game::PlayMode::TEST_ONE_MOV && mode != Game::PlayMode::TEST_STAT) {
 		int turn = 1;
 		while (DoTurn(turn++)) {}
 
@@ -70,20 +72,90 @@ bool Battle::DoBattle(const Character & character1, const Character & character2
 		}
 	}
 	else {
-		if (mode == Game::PlayMode::TEST_HUNDRED_BATTLES)
+		if (mode == Game::PlayMode::TEST_HUNDRED_BATTLES || mode == Game::PlayMode::TEST_STAT)
 			times_mov_test = 100;
 
 		int n_0_wins = 0;
-		for (int i = 0; i < times_mov_test; i++) {
-			int turn = 1;
-			while (DoTurn(turn++)) {}
-			if (characters[0].health > 0)
-				n_0_wins++;
-			characters[0].Reset();
-			characters[1].Reset();
+		if (mode == Game::PlayMode::TEST_STAT) {
+			int def_stat = -1;
+			switch (mov_test)
+			{
+			case Attack::Type::BASIC:
+				def_stat = characters[0].b_attack;
+				break;
+			case Attack::Type::SPECIAL:
+				def_stat = characters[0].sp_attack;
+				break;
+			case Attack::Type::POTION:
+				def_stat = characters[0].potion_recover;
+				break;
+			case Attack::Type::RELOAD:
+				def_stat = characters[0].mana_recover;
+				break;
+			default:
+				break;
+			}
+			int actual_stat = def_stat;
+			if (actual_stat - 5 <= 0)
+				actual_stat = 1;
+			else
+				actual_stat -= 5;
+
+			std::vector<Vector2> stat_won;
+			for (int j = 0; j < 10; j++) { //Do 10 * hundred battles and change the selected stat
+				for (int i = 0; i < times_mov_test; i++) {
+					int turn = 1;
+					while (DoTurn(turn++, false)) {}
+					if (characters[0].health > 0) {
+						n_0_wins++;
+						std::cout << "ch 0 won" << std::endl << std::endl;
+					}
+					else {
+						std::cout << "ch 1 won" << std::endl << std::endl;
+					}
+					characters[0].Reset();
+					switch (mov_test)
+					{
+					case Attack::Type::BASIC:
+						characters[0].b_attack = actual_stat;
+						break;
+					case Attack::Type::SPECIAL:
+						characters[0].sp_attack = actual_stat;
+						break;
+					case Attack::Type::POTION:
+						characters[0].potion_recover = actual_stat;
+						break;
+					case Attack::Type::RELOAD:
+						characters[0].mana_recover = actual_stat;
+						break;
+					default:
+						break;
+					}
+					characters[1].Reset();
+				}
+				std::cout << "raising stat" << std::endl;
+				stat_won.push_back(Vector2(actual_stat, n_0_wins));
+				n_0_wins = 0;
+				actual_stat++;
+			}
+			std::cout << "Simulation of stat " << characters[0].movements[mov_test]->ToString() << " finished" << std::endl;
+			for (auto i = stat_won.begin(); i != stat_won.end(); i++) {
+				std::cout << "value: " << (*i).first << " | won: " << (*i).second << "/100" << std::endl;
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl << "Character 0 (" << characters[0].name << "): won " << n_0_wins << "/" << times_mov_test;
-		std::cout << std::endl << "Character 1 (" << characters[1].name << "): won " << times_mov_test - n_0_wins << "/" << times_mov_test << std::endl << std::endl;
+		else {
+			for (int i = 0; i < times_mov_test; i++) {
+				int turn = 1;
+				while (DoTurn(turn++)) {}
+				if (characters[0].health > 0)
+					n_0_wins++;
+				characters[0].Reset();
+				characters[1].Reset();
+			}
+			std::cout << std::endl << "Character 0 (" << characters[0].name << "): won " << n_0_wins << "/" << times_mov_test;
+			std::cout << std::endl << "Character 1 (" << characters[1].name << "): won " << times_mov_test - n_0_wins << "/" << times_mov_test << std::endl << std::endl;
+		}
 		system("pause");
 	}
 	return false;
@@ -94,14 +166,15 @@ bool Battle::AreCharactersAlive()
 	return characters[0].health > 0 && characters[1].health > 0;
 }
 
-bool Battle::DoTurn(int n_turn)
+bool Battle::DoTurn(int n_turn, bool print_stats)
 {
-	std::cout << "Turn number " << blue << n_turn << white << ", characters:" << std::endl << std::endl;
-	characters[0].PrintStats();
-	std::cout << std::endl << std::endl;
-	characters[1].PrintStats();
-	std::cout << std::endl << std::endl;
-
+		std::cout << "Turn number " << blue << n_turn << white << ", characters:" << std::endl << std::endl;
+	if (print_stats) {
+		characters[0].PrintStats();
+		std::cout << std::endl << std::endl;
+		characters[1].PrintStats();
+		std::cout << std::endl << std::endl;
+	}
 	switch (mode)
 	{
 	case Game::PlayMode::HvsH:
@@ -116,6 +189,7 @@ bool Battle::DoTurn(int n_turn)
 		DoAIvAITurn();
 		break;
 	case Game::PlayMode::TEST_ONE_MOV:
+	case Game::PlayMode::TEST_STAT:
 		TestMovementTurn();
 		break;
 	default:
@@ -308,7 +382,7 @@ void Battle::CalculateFirstAttacker(int mov1, int mov2)
 		DoAttacks(1, 0, mov2, mov1);
 	}
 	else {
-		int first = rand() % 2;
+		int first = std::rand() % 2;
 
 		if (first == 0) {
 			DoAttacks(0, 1, mov1, mov2);
@@ -355,7 +429,7 @@ int Battle::AIThinkMov(int charac)
 {
 	std::vector<Attack::Type> attacks;
 	attacks.push_back(Attack::Type::BASIC);
-	attacks.push_back(Attack::Type::BASIC); //Twice for more possibility to do a basic
+	//attacks.push_back(Attack::Type::BASIC); //Twice for more possibility to do a basic
 
 	if (characters[charac].mana - characters[charac].mana_cost > 0) {
 		attacks.push_back(Attack::Type::SPECIAL);

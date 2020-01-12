@@ -12,7 +12,7 @@ public:
 
 private:
 	bool AreCharactersAlive();
-	bool DoTurn(int n_turn);
+	bool DoTurn(int n_turn, bool print_stats = true);
 	void DoHvHTurn();
 	void DoAttacks(int first_attacker, int second_attacker, int mov1, int mov2);
 	void DoHvAITurn();
@@ -20,6 +20,13 @@ private:
 	int AIThinkMov(int i);
 	void DoAIvAITurn();
 	void TestMovementTurn();
+
+	class Vector2 {
+	public:
+		Vector2(int a, int b) :first(a), second(b) {}
+		int first = 0;
+		int second = 0;
+	};
 
 	Character characters[2];
 	Game::PlayMode mode = Game::PlayMode::NONE;

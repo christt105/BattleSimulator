@@ -37,7 +37,7 @@ public:
 	int mana_cost		= -1;
 
 	int mana_recover	= 10;
-	int potion_recover  = 5;
+	int potion_recover  = 15;
 
 	int n_potions = 0;
 	int start_potions = 0;

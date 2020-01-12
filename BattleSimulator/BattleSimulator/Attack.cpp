@@ -6,7 +6,7 @@
 
 std::string Attack::ToString() const
 {
-	return std::string();
+	return name;
 }
 
 bool Basic::DoAttack(Character * attacker, Character * objective)
