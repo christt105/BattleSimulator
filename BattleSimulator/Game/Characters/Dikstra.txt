@@ -1,0 +1,10 @@
+name: Dikstra - Final Boss
+basic_attack: 6
+b_precision: 75
+special_attack: 15
+sp_precision: 50
+speed: 90
+mana: 30
+mana_cost: 10
+health: 101
+potions: 5

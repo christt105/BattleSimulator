@@ -1,200 +1,786 @@
 {
-    "Adventure": [
+  "Adventure": [
+    {
+      "type": "text",
+      "id": 0,
+      "text": "Adventure/Text/0.txt",
+      "to": 1
+    },
+    {
+      "type": "text",
+      "id": 1,
+      "text": "Adventure/Text/1.txt",
+      "to": 2
+    },
+    {
+      "type": "choice",
+      "id": 2,
+      "choices": [
         {
-            "type": "text",
-            "id": 0,
-            "text": "Adventure/Text/0.txt",
-            "to": 1
+          "name": "Buscar supervivientes",
+          "to": 3
         },
         {
-            "type": "text",
-            "id": 1,
-            "text": "Adventure/Text/1.txt",
-            "to": 2
-        },
-        {
-            "type": "choice",
-            "id": 2,
-            "choices": [
-                {
-                    "name": "Buscar supervivientes",
-                    "to": 3
-                },
-                {
-                    "name": "Buscar por la mini isla",
-                    "to": 4
-                }
-            ]
-        },
-        {
-            "type": "text",
-            "id": 3,
-            "text": "Adventure/Text/3.txt",
-            "to": 2
-        },
-        {
-            "type": "text",
-            "id": 4,
-            "text": "Adventure/Text/5.txt",
-            "to": 5
-        },
-        {
-            "type": "text",
-            "id": 5,
-            "text": "Adventure/Text/6.txt",
-            "to": 6
-        },
-        {
-            "type": "battle",
-            "id": 6,
-            "player": "Characters/Player.txt",
-            "enemy": "Characters/Naruto.txt",
-            "song": "Adventure/Audio/dialga.mp3",
-            "to": 7
-        },
-        {
-            "type": "text",
-            "id": 7,
-            "text": "Adventure/Text/victory1.txt",
-            "to": 8
-        },
-        {
-            "type": "text",
-            "id": 8,
-            "text": "Adventure/Text/7.txt",
-            "to": 9
-        },
-        {
-            "type": "choice",
-            "id": 9,
-            "choices": [
-                {
-                    "name": "Arrancarle del pecho un traductor al robot derrotado",
-                    "to": 10
-                },
-                {
-                    "name": "Irse",
-                    "to": 11
-                }
-            ]
-        },
-        {
-            "type": "text",
-            "id": 10,
-            "text": "Adventure/Text/8.txt",
-            "to": 12
-        },
-        {
-            "type": "text",
-            "id": 11,
-            "text": "Adventure/Text/9.txt",
-            "to": 12
-        },
-        {
-            "type": "text",
-            "id": 12,
-            "text": "Adventure/Text/10.txt",
-            "to": 13
-        },
-        {
-            "type": "battle",
-            "id": 13,
-            "player": "Characters/Player.txt",
-            "enemy": "Characters/Naruto.txt",
-            "song": "Adventure/Audio/dialga.mp3",
-            "to": 14
-        },
-        {
-            "type": "text",
-            "id": 14,
-            "text": "Adventure/Text/victory2.txt",
-            "to": 15
-        },
-        {
-            "type": "text",
-            "id": 15,
-            "text": "Adventure/Text/11.txt",
-            "to": 16
-        },
-        {
-            "type": "text",
-            "id": 16,
-            "text": "Adventure/Text/12.txt",
-            "to": 17
-        },
-        {
-            "type": "text",
-            "id": 17,
-            "text": "Adventure/Text/13.txt",
-            "to": 18
-        },
-        {
-            "type": "text",
-            "id": 18,
-            "text": "Adventure/Text/14.txt",
-            "to": 19
-        },
-        {
-            "type": "text",
-            "id": 19,
-            "text": "Adventure/Text/15.txt",
-            "to": 20
-        },
-        {
-            "type": "choice",
-            "id": 20,
-            "choices": [
-                {
-                    "name": "Atravesar un antiguo campamento",
-                    "to": 21
-                },
-                {
-                    "name": "Seguir el rastro del río",
-                    "to": 25
-                }
-            ]
-        },
-        {
-            "type": "text",
-            "id": 21,
-            "text": "Adventure/Text/16.txt",
-            "to": 22
-        },
-        {
-            "type": "text",
-            "id": 22,
-            "text": "Adventure/Text/17.txt",
-            "to": 23
-        },
-        {
-            "type": "battle",
-            "id": 23,
-            "player": "Characters/Player.txt",
-            "enemy": "Characters/Naruto.txt",
-            "song": "Adventure/Audio/dialga.mp3",
-            "to": 24
-        },
-        {
-            "type": "text",
-            "id": 24,
-            "text": "Adventure/Text/victory3.txt",
-            "to": 25
-        },
-        {
-            "type": "text",
-            "id": 25,
-            "text": "Adventure/Text/18.txt",
-            "to": 26
-        },
-        {
-            "type": "text",
-            "id": 26,
-            "text": "Adventure/Text/19.txt",
-            "to": 27
-        },
-        {
-            "type": "end",
-            "id": 27
+          "name": "Buscar por la mini isla",
+          "to": 4
         }
-    ]
+      ]
+    },
+    {
+      "type": "text",
+      "id": 3,
+      "text": "Adventure/Text/3.txt",
+      "to": 2
+    },
+    {
+      "type": "text",
+      "id": 4,
+      "text": "Adventure/Text/5.txt",
+      "to": 5
+    },
+    {
+      "type": "text",
+      "id": 5,
+      "text": "Adventure/Text/6.txt",
+      "to": 6
+    },
+    {
+      "type": "battle",
+      "id": 6,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/Rob0tRasoAveriado.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 7
+    },
+    {
+      "type": "text",
+      "id": 7,
+      "text": "Adventure/Text/victory1.txt",
+      "to": 8
+    },
+    {
+      "type": "text",
+      "id": 8,
+      "text": "Adventure/Text/7.txt",
+      "to": 9
+    },
+    {
+      "type": "choice",
+      "id": 9,
+      "choices": [
+        {
+          "name": "Arrancarle del pecho un traductor al robot derrotado",
+          "to": 10
+        },
+        {
+          "name": "Irse",
+          "to": 11
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 10,
+      "text": "Adventure/Text/8.txt",
+      "to": 12
+    },
+    {
+      "type": "text",
+      "id": 11,
+      "text": "Adventure/Text/9.txt",
+      "to": 12
+    },
+    {
+      "type": "text",
+      "id": 12,
+      "text": "Adventure/Text/10.txt",
+      "to": 13
+    },
+    {
+      "type": "battle",
+      "id": 13,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/SoldadosRasos.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 14
+    },
+    {
+      "type": "text",
+      "id": 14,
+      "text": "Adventure/Text/victory2.txt",
+      "to": 15
+    },
+    {
+      "type": "text",
+      "id": 15,
+      "text": "Adventure/Text/11.txt",
+      "to": 16
+    },
+    {
+      "type": "text",
+      "id": 16,
+      "text": "Adventure/Text/12.txt",
+      "to": 17
+    },
+    {
+      "type": "text",
+      "id": 17,
+      "text": "Adventure/Text/13.txt",
+      "to": 18
+    },
+    {
+      "type": "text",
+      "id": 18,
+      "text": "Adventure/Text/14.txt",
+      "to": 19
+    },
+    {
+      "type": "text",
+      "id": 19,
+      "text": "Adventure/Text/15.txt",
+      "to": 20
+    },
+    {
+      "type": "choice",
+      "id": 20,
+      "choices": [
+        {
+          "name": "Atravesar un antiguo campamento",
+          "to": 21
+        },
+        {
+          "name": "Seguir el rastro del río",
+          "to": 25
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 21,
+      "text": "Adventure/Text/16.txt",
+      "to": 22
+    },
+    {
+      "type": "text",
+      "id": 22,
+      "text": "Adventure/Text/17.txt",
+      "to": 23
+    },
+    {
+      "type": "battle",
+      "id": 23,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/JabbatheJAT.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 24
+    },
+    {
+      "type": "text",
+      "id": 24,
+      "text": "Adventure/Text/victory3.txt",
+      "to": 25
+    },
+    {
+      "type": "text",
+      "id": 25,
+      "text": "Adventure/Text/18.txt",
+      "to": 26
+    },
+    {
+      "type": "text",
+      "id": 26,
+      "text": "Adventure/Text/19.txt",
+      "to": 27
+    },
+    {
+      "type": "text",
+      "id": 27,
+      "text": "Adventure/Text/20.txt",
+      "to": 29
+    },
+    {
+      "type": "choice",
+      "id": 29,
+      "choices": [
+        {
+          "name": "Ir a la armeria",
+          "to": 30
+        },
+        {
+          "name": "Ir a la taberna",
+          "to": 31
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 30,
+      "text": "Adventure/Text/21.txt",
+      "to": 28
+    },
+    {
+      "type": "choice",
+      "id": 28,
+      "choices": [
+        {
+          "name": "Regresar a la plaza",
+          "to": 27
+        },
+        {
+          "name": "Ir a la taberna",
+          "to": 31
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 31,
+      "text": "Adventure/Text/22.txt",
+      "to": 32
+    },
+    {
+      "type": "choice",
+      "id": 32,
+      "choices": [
+        {
+          "name": "Regresar a la plaza",
+          "to": 27
+        },
+        {
+          "name": "Quedarse en la taberna",
+          "to": 33
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 33,
+      "text": "Adventure/Text/23.txt",
+      "to": 34
+    },
+    {
+      "type": "choice",
+      "id": 34,
+      "choices": [
+        {
+          "name": "Recordar el pasado",
+          "to": 35
+        },
+        {
+          "name": "Beber Flüxur hasta la muerte",
+          "to": 38
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 35,
+      "text": "Adventure/Text/24.txt",
+      "to": 36
+    },
+    {
+      "type": "battle",
+      "id": 36,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/BandidoDestripador.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 37
+    },
+    {
+      "type": "text",
+      "id": 37,
+      "text": "Adventure/Text/victory4.txt",
+      "to": 41
+    },
+    {
+      "type": "text",
+      "id": 38,
+      "text": "Adventure/Text/25.txt",
+      "to": 39
+    },
+    {
+      "type": "battle",
+      "id": 39,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/PlantusBorrachus.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 40
+    },
+    {
+      "type": "text",
+      "id": 40,
+      "text": "Adventure/Text/victory5.txt",
+      "to": 41
+    },
+    {
+      "type": "text",
+      "id": 41,
+      "text": "Adventure/Text/26.txt",
+      "to": 42
+    },
+    {
+      "type": "text",
+      "id": 42,
+      "text": "Adventure/Text/27.txt",
+      "to": 43
+    },
+    {
+      "type": "text",
+      "id": 43,
+      "text": "Adventure/Text/28.txt",
+      "to": 44
+    },
+    {
+      "type": "choice",
+      "id": 44,
+      "choices": [
+        {
+          "name": "Esconderse entre los cadaveres",
+          "to": 45
+        },
+        {
+          "name": "Salir de la nave",
+          "to": 48
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 45,
+      "text": "Adventure/Text/29.txt",
+      "to": 46
+    },
+    {
+      "type": "text",
+      "id": 46,
+      "text": "Adventure/Text/30.txt",
+      "to": 47
+    },
+    {
+      "type": "text",
+      "id": 47,
+      "text": "Adventure/Text/35.txt",
+      "to": 53
+    },
+    {
+      "type": "text",
+      "id": 48,
+      "text": "Adventure/Text/31.txt",
+      "to": 49
+    },
+    {
+      "type": "text",
+      "id": 49,
+      "text": "Adventure/Text/32.txt",
+      "to": 50
+    },
+    {
+      "type": "choice",
+      "id": 50,
+      "choices": [
+        {
+          "name": "Volverse a asomar",
+          "to": 51
+        },
+        {
+          "name": "Mostrar bandela Blanca, vengo en son de paz",
+          "to": 52
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 51,
+      "text": "Adventure/Text/33.txt",
+      "to": 47
+    },
+    {
+      "type": "text",
+      "id": 52,
+      "text": "Adventure/Text/34.txt",
+      "to": 47
+    },
+    {
+      "type": "text",
+      "id": 53,
+      "text": "Adventure/Text/36.txt",
+      "to": 54
+    },
+    {
+      "type": "choice",
+      "id": 54,
+      "choices": [
+        {
+          "name": "Acercarse y abrazarla",
+          "to": 55
+        },
+        {
+          "name": "Esconderse en las sombras",
+          "to": 59
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 55,
+      "text": "Adventure/Text/37.txt",
+      "to": 56
+    },
+    {
+      "type": "battle",
+      "id": 56,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/Lynna.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 57
+    },
+    {
+      "type": "text",
+      "id": 57,
+      "text": "Adventure/Text/victory6.txt",
+      "to": 58
+    },
+    {
+      "type": "text",
+      "id": 58,
+      "text": "Adventure/Text/41.txt",
+      "to": 63
+    },
+    {
+      "type": "text",
+      "id": 59,
+      "text": "Adventure/Text/38.txt",
+      "to": 60
+    },
+    {
+      "type": "choice",
+      "id": 60,
+      "choices": [
+        {
+          "name": "Atacar por la espalda",
+          "to": 61
+        },
+        {
+          "name": "Persuadirla",
+          "to": 62
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 61,
+      "text": "Adventure/Text/39.txt",
+      "to": 56
+    },
+    {
+      "type": "text",
+      "id": 62,
+      "text": "Adventure/Text/40.txt",
+      "to": 58
+    },
+    {
+      "type": "text",
+      "id": 63,
+      "text": "Adventure/Text/42.txt",
+      "to": 64
+    },
+    {
+      "type": "text",
+      "id": 64,
+      "text": "Adventure/Text/43.txt",
+      "to": 65
+    },
+    {
+      "type": "choice",
+      "id": 65,
+      "choices": [
+        {
+          "name": "Regresar al asentamiento",
+          "to": 66
+        },
+        {
+          "name": "Descansar y recuperar fuerzas",
+          "to": 68
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 66,
+      "text": "Adventure/Text/44.txt",
+      "to": 67
+    },
+    {
+      "type": "text",
+      "id": 67,
+      "text": "Adventure/Text/47.txt",
+      "to": 70
+    },
+    {
+      "type": "text",
+      "id": 68,
+      "text": "Adventure/Text/45.txt",
+      "to": 69
+    },
+    {
+      "type": "text",
+      "id": 69,
+      "text": "Adventure/Text/46.txt",
+      "to": 67
+    },
+    {
+      "type": "battle",
+      "id": 70,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/Rob0tAltoRago.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 71
+    },
+    {
+      "type": "text",
+      "id": 71,
+      "text": "Adventure/Text/victory7.txt",
+      "to": 72
+    },
+    {
+      "type": "text",
+      "id": 72,
+      "text": "Adventure/Text/48.txt",
+      "to": 73
+    },
+    {
+      "type": "text",
+      "id": 73,
+      "text": "Adventure/Text/49.txt",
+      "to": 74
+    },
+    {
+      "type": "text",
+      "id": 74,
+      "text": "Adventure/Text/50.txt",
+      "to": 75
+    },
+    {
+      "type": "choice",
+      "id": 75,
+      "choices": [
+        {
+          "name": "Investigar por la Taberna",
+          "to": 76
+        },
+        {
+          "name": "Partir hacia las montañas",
+          "to": 79
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 76,
+      "text": "Adventure/Text/51.txt",
+      "to": 77
+    },
+    {
+      "type": "choice",
+      "id": 77,
+      "choices": [
+        {
+          "name": "Dar la vuelta al manuscrito",
+          "to": 78
+        },
+        {
+          "name": "Partir hacia las montañas",
+          "to": 79
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 78,
+      "text": "Adventure/Text/52.txt",
+      "to": 79
+    },
+    {
+      "type": "text",
+      "id": 79,
+      "text": "Adventure/Text/53.txt",
+      "to": 80
+    },
+    {
+      "type": "text",
+      "id": 80,
+      "text": "Adventure/Text/54.txt",
+      "to": 81
+    },
+    {
+      "type": "text",
+      "id": 81,
+      "text": "Adventure/Text/55.txt",
+      "to": 82
+    },
+    {
+      "type": "text",
+      "id": 82,
+      "text": "Adventure/Text/56.txt",
+      "to": 83
+    },
+    {
+      "type": "choice",
+      "id": 83,
+      "choices": [
+        {
+          "name": "Ir a la nueva Armeria",
+          "to": 84
+        },
+        {
+          "name": "Estoy listo",
+          "to": 85
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 84,
+      "text": "Adventure/Text/58.txt",
+      "to": 85
+    },
+    {
+      "type": "text",
+      "id": 85,
+      "text": "Adventure/Text/57.txt",
+      "to": 86
+    },
+    {
+      "type": "text",
+      "id": 86,
+      "text": "Adventure/Text/59.txt",
+      "to": 87
+    },
+    {
+      "type": "text",
+      "id": 87,
+      "text": "Adventure/Text/60.txt",
+      "to": 88
+    },
+    {
+      "type": "text",
+      "id": 88,
+      "text": "Adventure/Text/61.txt",
+      "to": 89
+    },
+    {
+      "type": "text",
+      "id": 89,
+      "text": "Adventure/Text/62.txt",
+      "to": 90
+    },
+    {
+      "type": "text",
+      "id": 90,
+      "text": "Adventure/Text/63.txt",
+      "to": 91
+    },
+    {
+      "type": "text",
+      "id": 91,
+      "text": "Adventure/Text/64.txt",
+      "to": 92
+    },
+    {
+      "type": "choice",
+      "id": 92,
+      "choices": [
+        {
+          "name": "Disparar a Dikstra",
+          "to": 93
+        },
+        {
+          "name": "Correr hacia Dikstra",
+          "to": 95
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 93,
+      "text": "Adventure/Text/65.txt",
+      "to": 94
+    },
+    {
+      "type": "text",
+      "id": 94,
+      "text": "Adventure/Text/66.txt",
+      "to": 96
+    },
+    {
+      "type": "text",
+      "id": 95,
+      "text": "Adventure/Text/67.txt",
+      "to": 96
+    },
+    {
+      "type": "text",
+      "id": 96,
+      "text": "Adventure/Text/68.txt",
+      "to": 97
+    },
+    {
+      "type": "battle",
+      "id": 97,
+      "player": "Characters/Player.txt",
+      "enemy": "Characters/Dikstra.txt",
+      "song": "Adventure/Audio/dialga.mp3",
+      "to": 98
+    },
+    {
+      "type": "text",
+      "id": 98,
+      "text": "Adventure/Text/victory8.txt",
+      "to": 99
+    },
+    {
+      "type": "text",
+      "id": 99,
+      "text": "Adventure/Text/69.txt",
+      "to": 100
+    },
+    {
+      "type": "text",
+      "id": 100,
+      "text": "Adventure/Text/70.txt",
+      "to": 101
+    },
+    {
+      "type": "choice",
+      "id": 101,
+      "choices": [
+        {
+          "name": "Devolver la legendaria espada",
+          "to": 102
+        },
+        {
+          "name": "Escapar con la legendaria espada",
+          "to": 103
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": 102,
+      "text": "Adventure/Text/72.txt",
+      "to": 104
+    },
+    {
+      "type": "text",
+      "id": 103,
+      "text": "Adventure/Text/71.txt",
+      "to": 104
+    },
+    {
+      "type": "end",
+      "id": 104,
+      "text": "Adventure/Text/1.txt"
+
+    }
+  ]
 }
