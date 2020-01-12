@@ -382,9 +382,7 @@ void Battle::CalculateFirstAttacker(int mov1, int mov2)
 		DoAttacks(1, 0, mov2, mov1);
 	}
 	else {
-		int first = std::rand() % 2;
-
-		if (first == 0) {
+		if (std::rand() % 2 == 0) {
 			DoAttacks(0, 1, mov1, mov2);
 		}
 		else {
